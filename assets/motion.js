@@ -254,7 +254,6 @@
       const giant = one('[data-gp-giant]', el);
       const glow = one('[data-gp-glow]', el);
       const stage = one('[data-gp-stage]', el);
-      const copy = one('.gp__copy', el);
       const pinLength = parseFloat(el.dataset.pinLength) || 260;
 
       el.classList.add('is-animated');
@@ -265,37 +264,55 @@
       mm.add({ isMobile: '(max-width: 899px)', isDesktop: '(min-width: 900px)' }, (ctx) => {
         const { isMobile } = ctx.conditions;
         const meterObj = { v: 0 };
+        // On phones the ladle rests lower so it stays clear of the heading; the stream is shortened to match.
+        const LADLE_Y = isMobile ? 110 : 0;
+        const STREAM_SCALE = isMobile ? (524 - LADLE_Y) / 524 : 1;
+        const progress = one('[data-gp-progress]', el);
+        const progressLabel = one('[data-gp-progress-label]', el);
+        const progressPct = one('[data-gp-progress-pct]', el);
+        const progressBar = one('[data-gp-progress-bar]', el);
+        const updateMeter = () => {
+          const v = Math.round(meterObj.v);
+          meter.textContent = v;
+          if (!isMobile) return;
+          progressPct.textContent = v;
+          gsap.set(progressBar, { scaleX: meterObj.v / 100 });
+          progressLabel.textContent = v >= 100 ? 'Freshly jarred' : v > 0 ? 'Pouring…' : 'Swipe up to pour';
+          el.classList.toggle('is-pouring', v > 0);
+        };
         gsap.set(fill, { y: 290 });
-        gsap.set(streamOuter, { scaleY: 0, transformOrigin: '50% 0%' });
+        gsap.set(streamOuter, { y: LADLE_Y, scaleY: 0, transformOrigin: '50% 0%' });
         gsap.set(streamInner, { scaleY: 1, transformOrigin: '50% 100%' });
-        gsap.set(ladle, { y: -700, autoAlpha: 0, rotation: -10, transformOrigin: '99% 73.5%' });
+        gsap.set(ladle, { y: -700, autoAlpha: 0, rotation: -10, scale: isMobile ? 0.6 : 1, transformOrigin: '99% 73.5%' });
         gsap.set(labelMask, { attr: { width: 0 } });
         gsap.set(card, { autoAlpha: 0, x: isMobile ? 0 : 70, y: isMobile ? 80 : 0 });
         gsap.set(notes, { autoAlpha: 0, x: isMobile ? 0 : -16, y: isMobile ? 12 : 0 });
         gsap.set(q('.gp__note-line', el), { scaleX: 0 });
-        meter.textContent = '0';
+        updateMeter();
 
         const tl = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
             trigger: pin,
             start: 'top top',
-            end: () => `+=${window.innerHeight * (pinLength / 100)}`,
+            end: () => `+=${window.innerHeight * ((isMobile ? Math.min(pinLength, 150) : pinLength) / 100)}`,
             pin: true,
-            scrub: 1,
+            scrub: isMobile ? 0.6 : 1,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            // Phones: one swipe plays the whole pour (snaps to the start or the finished jar).
+            snap: isMobile ? { snapTo: [0, 1], directional: true, delay: 0.05, duration: { min: 0.9, max: 1.6 }, ease: 'power1.inOut' } : false,
           },
         });
 
         tl.to(lid, { y: -170, x: 130, rotation: 32, autoAlpha: 0, duration: 0.9, ease: 'power2.in' }, 0)
           .to(one('.gp__cue', el), { autoAlpha: 0, duration: 0.4 }, 0)
-          .to(ladle, { y: 0, autoAlpha: 1, rotation: 0, duration: 0.9, ease: 'power3.out' }, 0.2)
+          .to(ladle, { y: LADLE_Y, autoAlpha: 1, rotation: 0, duration: 0.9, ease: 'power3.out' }, 0.2)
           .to(ladle, { rotation: 36, duration: 0.6, ease: 'power1.inOut' }, 1.0)
-          .to(streamOuter, { scaleY: 1, duration: 0.5, ease: 'power1.in' }, 1.25)
+          .to(streamOuter, { scaleY: STREAM_SCALE, duration: 0.5, ease: 'power1.in' }, 1.25)
           .to(ripples, { opacity: 1, duration: 0.2 }, 1.7)
           .to(fill, { y: 0, duration: 3.6 }, 1.7)
-          .to(meterObj, { v: 100, duration: 3.6, onUpdate: () => { meter.textContent = Math.round(meterObj.v); } }, 1.7);
+          .to(meterObj, { v: 100, duration: 3.6, onUpdate: updateMeter }, 1.7);
 
         notes.forEach((note, i) => {
           const at = 1.9 + i * 0.85;
@@ -316,9 +333,7 @@
           .to(glow, { scale: 1.35, opacity: 0.9, duration: 7.7 }, 0);
 
         if (isMobile) {
-          tl.to(one('.gp__sub', el), { autoAlpha: 0, duration: 0.3 }, 0.1)
-            .to(stage, { scale: 0.62, y: () => -copy.offsetHeight + 8, transformOrigin: '50% 0%', duration: 0.8, ease: 'power2.inOut' }, 6.6)
-            .to(copy, { autoAlpha: 0, y: -30, duration: 0.6 }, 6.4);
+          tl.to(progress, { autoAlpha: 0, y: 20, duration: 0.4 }, 6.6);
         } else {
           tl.to(stage, { xPercent: -8, duration: 0.8, ease: 'power2.inOut' }, 6.8);
         }

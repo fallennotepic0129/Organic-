@@ -66,6 +66,16 @@
       {% render 'product-card', product: product, eyebrow: section.settings.card_eyebrow, blurb: section.settings.card_blurb %}
     </div>
 
+    <div class="gp__progress" aria-hidden="true" data-gp-progress>
+      <div class="gp__progress-row">
+        <span class="gp__progress-label">
+          <span class="gp__progress-swipe">{% render 'icon', name: 'arrow-right', size: 14 %}</span>
+          <span data-gp-progress-label>Swipe up to pour</span>
+        </span>
+        <span class="gp__progress-pct"><span data-gp-progress-pct>0</span>%</span>
+      </div>
+      <div class="gp__progress-track"><span class="gp__progress-bar" data-gp-progress-bar></span></div>
+    </div>
     <div class="gp__meter" aria-hidden="true" data-gp-intro>
       <span class="gp__meter-label">Poured</span>
       <span class="gp__meter-value"><span data-gp-meter>100</span>%</span>
