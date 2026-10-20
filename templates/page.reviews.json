@@ -1,0 +1,63 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Reviews",
+        "heading": "Tried it? Tell everyone.",
+        "text": "Honest reviews help other families choose. Photo reviews are extra welcome.",
+        "art": "both"
+      }
+    },
+    "leave": {
+      "type": "leave-review",
+      "settings": {
+        "products": [
+          "desi-ghee",
+          "shilajit"
+        ]
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Pick your product.",
+            "text": "Choose the jar you bought below."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Rate & write.",
+            "text": "Stars, a few honest words, and a photo if you like."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Help a family choose.",
+            "text": "Your review appears on the product page once published."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "heading": "What others are saying."
+      },
+      "blocks": {},
+      "block_order": []
+    }
+  },
+  "order": [
+    "hero",
+    "leave",
+    "reviews"
+  ]
+}

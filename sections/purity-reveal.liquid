@@ -1,0 +1,99 @@
+<section class="purity" data-scene="purity">
+  <div class="container">
+    <div class="purity__head">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2" data-split>{{ section.settings.heading }}</h2>
+      <p class="purity__lede" data-reveal>{{ section.settings.text }}</p>
+    </div>
+
+    <div class="stats">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'stat' -%}
+          <div class="stat" data-reveal {{ block.shopify_attributes }}>
+            <p class="stat__value">
+              {%- if block.settings.prefix != blank -%}<span class="stat__affix">{{ block.settings.prefix }}</span>{%- endif -%}
+              <span data-count-to="{{ block.settings.value }}" data-decimals="{{ block.settings.decimals }}">{{ block.settings.value }}</span>
+              {%- if block.settings.suffix != blank -%}<span class="stat__affix">{{ block.settings.suffix }}</span>{%- endif -%}
+            </p>
+            <p class="stat__label">{{ block.settings.label }}</p>
+            {%- if block.settings.note != blank -%}<p class="stat__note">{{ block.settings.note }}</p>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="certs">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'certificate' -%}
+          {% render 'certificate-card', block: block %}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="purity__cta">
+        <a class="btn btn--outline" href="{{ section.settings.cta_link | default: '/pages/lab-reports' }}" data-magnetic><span class="btn__label">{{ section.settings.cta_label }}</span>{% render 'icon', name: 'arrow-right', size: 16 %}</a>
+      </div>
+    {%- endif -%}
+  </div>
+  {% render 'lightbox' %}
+</section>
+
+{% schema %}
+{
+  "name": "Purity & certificates",
+  "tag": "div",
+  "class": "section-purity",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Proof, not promises" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tested. Certified. Sealed." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Every batch is tested by an independent lab before it is jarred. Here are the numbers — and the paperwork to back them up." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "See all lab reports" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "prefix", "label": "Prefix (e.g. ≥ or <)" },
+        { "type": "number", "id": "value", "label": "Number", "default": 100 },
+        { "type": "range", "id": "decimals", "label": "Decimals", "min": 0, "max": 2, "step": 1, "default": 0 },
+        { "type": "text", "id": "suffix", "label": "Suffix (e.g. %)", "default": "%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Pure" },
+        { "type": "text", "id": "note", "label": "Small note" }
+      ]
+    },
+    {
+      "type": "certificate",
+      "name": "Certificate",
+      "settings": [
+        { "type": "text", "id": "issuer", "label": "Issuer", "default": "Punjab Food Authority" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Food business licence" },
+        { "type": "text", "id": "number", "label": "Licence / report number" },
+        { "type": "text", "id": "date", "label": "Date" },
+        { "type": "image_picker", "id": "image", "label": "Certificate image" },
+        { "type": "url", "id": "file_url", "label": "PDF link", "info": "Upload the PDF in Content → Files and paste its link here." },
+        { "type": "text", "id": "seal_mark", "label": "Seal centre text", "default": "MD" },
+        { "type": "text", "id": "seal_text", "label": "Seal ring text", "default": "VERIFIED · CERTIFIED · " },
+        { "type": "select", "id": "seal_tone", "label": "Seal colour", "default": "wax", "options": [ { "value": "wax", "label": "Wax red" }, { "value": "gold", "label": "Gold" } ] }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purity & certificates",
+      "blocks": [
+        { "type": "stat", "settings": { "value": 100, "suffix": "%", "label": "Pure desi ghee", "note": "No vegetable oil, colour or preservative" } },
+        { "type": "stat", "settings": { "value": 0, "suffix": "", "label": "Additives", "note": "In either product. Ever." } },
+        { "type": "stat", "settings": { "value": 30, "suffix": " L", "label": "Milk per jar", "note": "Approx. for one litre of bilona ghee" } },
+        { "type": "stat", "settings": { "value": 4200, "suffix": " m", "label": "Shilajit harvest altitude", "note": "Gilgit-Baltistan" } },
+        { "type": "certificate", "settings": { "issuer": "Punjab Food Authority", "title": "Food business licence", "seal_mark": "PFA", "seal_text": "LICENSED · FOOD AUTHORITY · " } },
+        { "type": "certificate", "settings": { "issuer": "Independent laboratory", "title": "Ghee purity analysis", "seal_mark": "LAB", "seal_text": "LAB TESTED · BATCH VERIFIED · ", "seal_tone": "gold" } },
+        { "type": "certificate", "settings": { "issuer": "Independent laboratory", "title": "Shilajit heavy-metal & purity report", "seal_mark": "LAB", "seal_text": "HEAVY METALS · FULVIC ACID · " } },
+        { "type": "certificate", "settings": { "issuer": "Halal certification body", "title": "Halal certificate", "seal_mark": "حلال", "seal_text": "HALAL · CERTIFIED · ", "seal_tone": "gold" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

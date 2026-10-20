@@ -1,0 +1,39 @@
+<div class="marquee marquee--{{ section.settings.style }}" data-marquee data-speed="{{ section.settings.speed }}" aria-label="{{ section.blocks | map: 'settings' | map: 'text' | join: ' · ' | escape }}">
+  <div class="marquee__track" data-marquee-track aria-hidden="true">
+    {%- for i in (1..2) -%}
+      <div class="marquee__group">
+        {%- for block in section.blocks -%}
+          <span class="marquee__item">{{ block.settings.text }}</span>
+          <span class="marquee__sep">{% render 'icon', name: 'sparkle', size: 22 %}</span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee",
+  "tag": "section",
+  "class": "section-marquee",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Style", "default": "gold", "options": [ { "value": "gold", "label": "Gold" }, { "value": "ink", "label": "Ink" }, { "value": "outline", "label": "Outline" } ] },
+    { "type": "range", "id": "speed", "label": "Speed (seconds per loop)", "min": 10, "max": 60, "step": 2, "default": 26 }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "100% pure" } ] }
+  ],
+  "presets": [
+    {
+      "name": "Marquee",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Bilona hand-churned" } },
+        { "type": "item", "settings": { "text": "Lab tested every batch" } },
+        { "type": "item", "settings": { "text": "Himalayan shilajit" } },
+        { "type": "item", "settings": { "text": "Cash on delivery" } },
+        { "type": "item", "settings": { "text": "Nothing added" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

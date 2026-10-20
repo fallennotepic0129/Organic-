@@ -1,0 +1,13 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "brand_name": "Mian Dairies",
+      "enable_preloader": true,
+      "enable_smooth_scroll": true,
+      "enable_cursor": true,
+      "enable_grain": true,
+      "free_shipping_threshold": 5000
+    }
+  }
+}

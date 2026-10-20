@@ -1,0 +1,57 @@
+{%- liquid
+  assign product = section.settings.product
+  assign uid_g = 'bg-' | append: section.id
+  assign uid_s = 'bs-' | append: section.id
+-%}
+<section class="bundle" data-scene="bundle" data-header-theme="dark">
+  <div class="bundle__inner container">
+    <div class="bundle__visual" aria-hidden="true">
+      <div class="bundle__burst" data-bundle-burst></div>
+      <div class="bundle__jar bundle__jar--ghee" data-bundle-left>{% render 'jar-ghee', uid: uid_g %}</div>
+      <div class="bundle__jar bundle__jar--shilajit" data-bundle-right>{% render 'jar-shilajit', uid: uid_s %}</div>
+      <span class="bundle__plus" data-bundle-plus>+</span>
+    </div>
+    <div class="bundle__copy">
+      <p class="eyebrow eyebrow--gold">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2" data-split>{{ section.settings.heading }}</h2>
+      <p class="bundle__text" data-reveal>{{ section.settings.text }}</p>
+      <ul class="bundle__list" data-reveal>
+        {%- assign items = section.settings.items | newline_to_br | split: '<br />' -%}
+        {%- for item in items -%}
+          {%- assign t = item | strip -%}
+          {%- if t != blank -%}<li>{% render 'icon', name: 'check', size: 16 %} {{ t }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+      <div class="bundle__buy" data-reveal>
+        {%- if product != blank -%}
+          {%- form 'product', product, data-product-form: '' -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {% render 'price', product: product %}
+            <button type="submit" class="btn btn--gold" data-magnetic {% unless product.available %}disabled{% endunless %}>
+              <span class="btn__label">{% if product.available %}{{ section.settings.button_label }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</span>{% render 'icon', name: 'plus', size: 16 %}
+            </button>
+          {%- endform -%}
+        {%- else -%}
+          <a class="btn btn--gold" href="{{ routes.all_products_collection_url }}" data-magnetic><span class="btn__label">{{ section.settings.button_label }}</span>{% render 'icon', name: 'arrow-right', size: 16 %}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bundle offer",
+  "tag": "div",
+  "class": "section-bundle",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Mian ritual" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Better together." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "A spoon of ghee for the family table, a pea of shilajit in warm milk for you. Our two favourites in one box — for less." },
+    { "type": "textarea", "id": "items", "label": "Bullet points (one per line)", "default": "1 kg Bilona Desi Ghee\n20 g Himalayan Shilajit resin\nFree delivery, gift-ready box" },
+    { "type": "product", "id": "product", "label": "Bundle product", "info": "Create a product for the bundle in Shopify admin and choose it here." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add the bundle" }
+  ],
+  "presets": [ { "name": "Bundle offer" } ]
+}
+{% endschema %}

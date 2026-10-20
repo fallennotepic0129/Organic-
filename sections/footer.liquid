@@ -1,0 +1,100 @@
+{%- liquid
+  assign brand = settings.brand_name | default: shop.name
+  assign menu_1 = linklists[section.settings.menu_1]
+  assign menu_2 = linklists[section.settings.menu_2]
+-%}
+<footer class="footer" data-header-theme="dark">
+  <div class="footer__cta container">
+    <p class="eyebrow eyebrow--gold">{{ section.settings.eyebrow }}</p>
+    <h2 class="footer__headline" data-split>{{ section.settings.headline }}</h2>
+    {%- form 'customer', class: 'footer__newsletter' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="form-success">{% render 'icon', name: 'check', size: 18 %} {{ 'newsletter.success' | t }}</p>
+      {%- else -%}
+        <label class="visually-hidden" for="FooterEmail">{{ 'newsletter.email' | t }}</label>
+        <input id="FooterEmail" type="email" name="contact[email]" placeholder="{{ 'newsletter.email' | t }}" autocomplete="email" required>
+        <button type="submit" class="btn btn--gold" data-magnetic><span class="btn__label">{{ 'newsletter.subscribe' | t }}</span>{% render 'icon', name: 'arrow-right', size: 16 %}</button>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+
+  <div class="footer__grid container">
+    <div class="footer__col footer__col--brand">
+      <p class="footer__about">{{ section.settings.about }}</p>
+      <ul class="footer__contact">
+        {%- if settings.contact_phone != blank -%}<li>{% render 'icon', name: 'phone', size: 16 %}<a href="tel:{{ settings.contact_phone | remove: ' ' }}">{{ settings.contact_phone }}</a></li>{%- endif -%}
+        {%- if settings.whatsapp_number != blank -%}<li>{% render 'icon', name: 'whatsapp', size: 16 %}<a href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' }}" target="_blank" rel="noopener">WhatsApp us</a></li>{%- endif -%}
+        {%- if settings.contact_email != blank -%}<li>{% render 'icon', name: 'mail', size: 16 %}<a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></li>{%- endif -%}
+        {%- if settings.contact_address != blank -%}<li>{% render 'icon', name: 'pin', size: 16 %}<span>{{ settings.contact_address }}</span></li>{%- endif -%}
+        {%- if settings.contact_hours != blank -%}<li>{% render 'icon', name: 'clock', size: 16 %}<span>{{ settings.contact_hours }}</span></li>{%- endif -%}
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <p class="footer__heading">{{ menu_1.title | default: 'Shop' }}</p>
+      <ul class="footer__links">
+        {%- if menu_1.links.size > 0 -%}
+          {%- for link in menu_1.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+        {%- else -%}
+          <li><a href="{{ routes.all_products_collection_url }}">All products</a></li>
+          <li><a href="/pages/lab-reports">Lab reports &amp; certificates</a></li>
+          <li><a href="/pages/reviews">Reviews</a></li>
+          <li><a href="/pages/our-story">Our story</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <p class="footer__heading">{{ menu_2.title | default: 'Help' }}</p>
+      <ul class="footer__links">
+        {%- if menu_2.links.size > 0 -%}
+          {%- for link in menu_2.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+        {%- else -%}
+          <li><a href="/pages/track-order">Track your order</a></li>
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+          {%- for policy in shop.policies -%}<li><a href="{{ policy.url }}">{{ policy.title }}</a></li>{%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <p class="footer__heading">We accept</p>
+      <ul class="pay-badges">
+        {%- assign methods = section.settings.payment_methods | split: ',' -%}
+        {%- for m in methods -%}<li class="pay-badge">{{ m | strip }}</li>{%- endfor -%}
+      </ul>
+      <div class="footer__social">
+        {%- if settings.social_instagram != blank -%}<a class="icon-btn" href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>{%- endif -%}
+        {%- if settings.social_facebook != blank -%}<a class="icon-btn" href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">{% render 'icon', name: 'facebook' %}</a>{%- endif -%}
+        {%- if settings.social_tiktok != blank -%}<a class="icon-btn" href="{{ settings.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a>{%- endif -%}
+        {%- if settings.social_youtube != blank -%}<a class="icon-btn" href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">{% render 'icon', name: 'youtube' %}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__mark" aria-hidden="true" data-footer-mark>
+    <span>{{ brand }}</span>
+  </div>
+
+  <div class="footer__bottom container">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ brand }}. {{ section.settings.copyright }}</p>
+    <p>{{ settings.cod_note }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Join the family" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Fresh batches, first. Recipes, always." },
+    { "type": "textarea", "id": "about", "label": "About text", "default": "Small-batch desi ghee churned the bilona way, and pure shilajit resin from the peaks of Gilgit-Baltistan. Nothing added. Nothing hidden." },
+    { "type": "link_list", "id": "menu_1", "label": "Menu 1" },
+    { "type": "link_list", "id": "menu_2", "label": "Menu 2" },
+    { "type": "text", "id": "payment_methods", "label": "Payment methods (comma separated)", "default": "Cash on Delivery, Bank Transfer, JazzCash, Easypaisa" },
+    { "type": "text", "id": "copyright", "label": "Copyright note", "default": "Made with care in Pakistan." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,13 @@
+<section class="notfound">
+  <div class="container notfound__inner">
+    <div class="notfound__jar" data-float aria-hidden="true">{% render 'jar-ghee', uid: 'nf', level: 0, label: false %}</div>
+    <p class="eyebrow">Error 404</p>
+    <h1 class="h2" data-split>This jar is empty.</h1>
+    <p>The page you're looking for has been eaten, moved or never existed.</p>
+    <a class="btn btn--ink" href="{{ routes.root_url }}" data-magnetic><span class="btn__label">Back home</span>{% render 'icon', name: 'arrow-right', size: 16 %}</a>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "404", "tag": "div", "class": "section-main-404", "settings": [] }
+{% endschema %}

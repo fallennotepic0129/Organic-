@@ -1,0 +1,95 @@
+{%- comment -%}
+  Squat amber-glass jar of Himalayan shilajit resin, in SVG.
+  Params: uid, level (0..1), label (bool), as_group, title, subtitle
+{%- endcomment -%}
+{%- liquid
+  assign uid = uid | default: 'js'
+  assign level = level | default: 1
+  assign ty = 1 | minus: level | times: 210
+  assign title = title | default: 'Shilajit'
+  assign subtitle = subtitle | default: 'Pure Himalayan Resin'
+  assign show_label = true
+  if label == false
+    assign show_label = false
+  endif
+-%}
+{%- capture jar_body -%}
+<g class="jar__root" data-jar="shilajit">
+  <defs>
+    <linearGradient id="{{ uid }}-resin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A2E1A"/>
+      <stop offset=".25" stop-color="#22150D"/>
+      <stop offset="1" stop-color="#070504"/>
+    </linearGradient>
+    <linearGradient id="{{ uid }}-resinsurface" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8A5A2E"/>
+      <stop offset="1" stop-color="#2B1A0F"/>
+    </linearGradient>
+    <linearGradient id="{{ uid }}-amberglass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C98A45" stop-opacity=".55"/>
+      <stop offset=".5" stop-color="#5C3416" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#C98A45" stop-opacity=".5"/>
+    </linearGradient>
+    <linearGradient id="{{ uid }}-brass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6E4A14"/>
+      <stop offset=".25" stop-color="#E2BC6A"/>
+      <stop offset=".5" stop-color="#9C7224"/>
+      <stop offset=".75" stop-color="#F1D490"/>
+      <stop offset="1" stop-color="#5E3F10"/>
+    </linearGradient>
+    <radialGradient id="{{ uid }}-glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#E9A24F" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#B9783A" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="{{ uid }}-clip">
+      <path d="M80 160 L80 166 C62 170 58 182 58 198 L58 350 C58 370 71 382 92 382 L208 382 C229 382 242 370 242 350 L242 198 C242 182 238 170 220 166 L220 160 Z"/>
+    </clipPath>
+    <clipPath id="{{ uid }}-labelclip">
+      <rect class="jar__label-mask" x="40" y="228" width="{% if show_label %}220{% else %}0{% endif %}" height="104"/>
+    </clipPath>
+  </defs>
+
+  <ellipse class="jar__shadow" cx="150" cy="392" rx="112" ry="10" fill="#000" opacity=".35"/>
+  <ellipse class="jar__glow" cx="150" cy="270" rx="190" ry="170" fill="url(#{{ uid }}-glow)" opacity="0"/>
+
+  <path d="M78 152 L78 164 C60 168 56 180 56 196 L56 350 C56 372 70 384 92 384 L208 384 C230 384 244 372 244 350 L244 196 C244 180 240 168 222 164 L222 152 Z" fill="url(#{{ uid }}-amberglass)"/>
+
+  <g clip-path="url(#{{ uid }}-clip)">
+    <g class="jar__fill" transform="translate(0 {{ ty }})">
+      <rect x="30" y="180" width="240" height="220" fill="url(#{{ uid }}-resin)"/>
+      <path class="jar__wave" fill="url(#{{ uid }}-resinsurface)" d="M-200 180 q30 -5 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V 190 H -200 Z"/>
+      <ellipse cx="118" cy="186" rx="34" ry="3" fill="#FFD9A8" opacity=".22"/>
+      <g class="jar__ripples" opacity="0">
+        <ellipse class="jar__ripple" cx="150" cy="182" rx="22" ry="4" fill="none" stroke="#E8B27A" stroke-width="2" opacity="0"/>
+        <ellipse class="jar__ripple" cx="150" cy="182" rx="22" ry="4" fill="none" stroke="#E8B27A" stroke-width="2" opacity="0"/>
+      </g>
+    </g>
+  </g>
+
+  <rect x="68" y="200" width="10" height="146" rx="5" fill="#FFE2BC" opacity=".28"/>
+  <rect x="84" y="208" width="3.5" height="80" rx="2" fill="#FFE2BC" opacity=".2"/>
+  <path d="M78 152 L78 164 C60 168 56 180 56 196 L56 350 C56 372 70 384 92 384 L208 384 C230 384 244 372 244 350 L244 196 C244 180 240 168 222 164 L222 152" fill="none" stroke="#E5A869" stroke-opacity=".45" stroke-width="2"/>
+
+  <g class="jar__label" clip-path="url(#{{ uid }}-labelclip)">
+    <rect x="56" y="232" width="188" height="96" fill="#0B0806"/>
+    <rect x="56" y="238" width="188" height="1.2" fill="#D4A653"/>
+    <rect x="56" y="321" width="188" height="1.2" fill="#D4A653"/>
+    <text class="jar__brand jar__brand--foil" x="150" y="260" text-anchor="middle">MIAN DAIRIES</text>
+    <text class="jar__title jar__title--foil" x="150" y="292" text-anchor="middle">{{ title }}</text>
+    <text class="jar__sub jar__sub--foil" x="150" y="311" text-anchor="middle">{{ subtitle | upcase }}</text>
+  </g>
+
+  <g class="jar__lid">
+    <rect x="68" y="112" width="164" height="46" rx="10" fill="url(#{{ uid }}-brass)"/>
+    <rect x="64" y="106" width="172" height="12" rx="6" fill="url(#{{ uid }}-brass)"/>
+    <circle cx="150" cy="135" r="12" fill="none" stroke="#5E3F10" stroke-opacity=".45" stroke-width="1.5"/>
+    <text class="jar__lidmark" x="150" y="140" text-anchor="middle">M</text>
+    <rect x="68" y="152" width="164" height="6" rx="3" fill="#3B2708" opacity=".35"/>
+  </g>
+</g>
+{%- endcapture -%}
+{%- if as_group -%}
+  {{ jar_body }}
+{%- else -%}
+  <svg class="jar jar--shilajit" viewBox="0 0 300 400" role="img" aria-label="{{ title | escape }} jar" overflow="visible">{{ jar_body }}</svg>
+{%- endif -%}

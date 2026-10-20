@@ -1,0 +1,24 @@
+<section class="account">
+  <div class="container">
+    <p><a class="link-underline" href="{{ routes.account_url }}">← Back to account</a></p>
+    <h1 class="h2">Order {{ order.name }}</h1>
+    <p>Placed {{ order.created_at | date: '%d %B %Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+    <div class="orders card">
+      {%- for line_item in order.line_items -%}
+        <div class="orders__row">
+          <strong>{{ line_item.title }}</strong>
+          <span>× {{ line_item.quantity }}</span>
+          <span>{{ line_item.final_line_price | money_without_trailing_zeros }}</span>
+          {%- if line_item.fulfillment -%}
+            <span>{% if line_item.fulfillment.tracking_url %}<a class="link-underline" href="{{ line_item.fulfillment.tracking_url }}" target="_blank" rel="noopener">Track {{ line_item.fulfillment.tracking_company }}</a>{% else %}{{ line_item.fulfillment.tracking_company }} {{ line_item.fulfillment.tracking_number }}{% endif %}</span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+      <div class="orders__row"><strong>Total</strong><span></span><span>{{ order.total_price | money_without_trailing_zeros }}</span></div>
+    </div>
+    {%- if order.shipping_address -%}
+      <h2 class="h3">Delivery address</h2>
+      <p>{{ order.shipping_address | format_address }}</p>
+    {%- endif -%}
+  </div>
+</section>

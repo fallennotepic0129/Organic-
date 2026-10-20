@@ -1,0 +1,44 @@
+<section class="contact">
+  <div class="container contact__grid">
+    <div class="contact__info">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2" data-split>{{ section.settings.heading }}</h2>
+      <ul class="contact__list" data-reveal>
+        {%- assign wa_number = settings.whatsapp_number | remove: '+' | remove: ' ' -%}
+        {%- if wa_number != blank -%}<li><span class="contact__icon">{% render 'icon', name: 'whatsapp', size: 20 %}</span><span><small>WhatsApp</small><a href="https://wa.me/{{ wa_number }}" target="_blank" rel="noopener">Chat with us</a></span></li>{%- endif -%}
+        {%- if settings.contact_phone != blank -%}<li><span class="contact__icon">{% render 'icon', name: 'phone', size: 20 %}</span><span><small>Phone</small><a href="tel:{{ settings.contact_phone | remove: ' ' }}">{{ settings.contact_phone }}</a></span></li>{%- endif -%}
+        {%- if settings.contact_email != blank -%}<li><span class="contact__icon">{% render 'icon', name: 'mail', size: 20 %}</span><span><small>Email</small><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></span></li>{%- endif -%}
+        {%- if settings.contact_address != blank -%}<li><span class="contact__icon">{% render 'icon', name: 'pin', size: 20 %}</span><span><small>Address</small>{{ settings.contact_address }}</span></li>{%- endif -%}
+        {%- if settings.contact_hours != blank -%}<li><span class="contact__icon">{% render 'icon', name: 'clock', size: 20 %}</span><span><small>Hours</small>{{ settings.contact_hours }}</span></li>{%- endif -%}
+      </ul>
+    </div>
+    <div class="contact__form card">
+      {%- form 'contact', class: 'form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="form-success">{% render 'icon', name: 'check', size: 18 %} {{ 'contact.success' | t }}</p>
+        {%- endif -%}
+        {{ form.errors | default_errors }}
+        <div class="form__row">
+          <label class="field"><span>{{ 'contact.name' | t }}</span><input type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}"></label>
+          <label class="field"><span>{{ 'contact.phone' | t }}</span><input type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}"></label>
+        </div>
+        <label class="field"><span>{{ 'contact.email' | t }} *</span><input type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}"></label>
+        <label class="field"><span>{{ 'contact.message' | t }}</span><textarea name="contact[body]" rows="5">{{ form.body }}</textarea></label>
+        <button type="submit" class="btn btn--ink" data-magnetic><span class="btn__label">{{ 'contact.send' | t }}</span>{% render 'icon', name: 'arrow-right', size: 16 %}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "div",
+  "class": "section-contact",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Say salaam" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We're real people. Talk to us." }
+  ],
+  "presets": [ { "name": "Contact form" } ]
+}
+{% endschema %}

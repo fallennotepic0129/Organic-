@@ -1,0 +1,15 @@
+{%- comment -%}
+  Star rating. Params: rating (0–5), count (optional), size (px)
+{%- endcomment -%}
+{%- liquid
+  assign rating = rating | default: 0 | times: 1.0
+  assign pct = rating | divided_by: 5.0 | times: 100 | round: 1
+  assign s = size | default: 14
+-%}
+<span class="stars" style="--stars-size: {{ s }}px; --stars-pct: {{ pct }}%;" role="img" aria-label="{{ rating | round: 1 }} out of 5 stars">
+  <span class="stars__track" aria-hidden="true">★★★★★</span>
+  <span class="stars__fill" aria-hidden="true">★★★★★</span>
+</span>
+{%- if count != blank -%}
+  <span class="stars__count">{{ rating | round: 1 }} · {{ count }} {% if count == 1 %}review{% else %}reviews{% endif %}</span>
+{%- endif -%}

@@ -1,0 +1,83 @@
+{%- comment -%}
+  Line illustrations for the bilona process. Param: art ('cow' | 'curd' | 'churn' | 'butter' | 'fire' | 'jar'), uid
+{%- endcomment -%}
+{%- if art == 'jar' -%}
+  {% render 'jar-ghee', uid: uid %}
+{%- else -%}
+<svg class="art art--{{ art }}" viewBox="0 0 240 240" aria-hidden="true" fill="none" stroke="#17120D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  {%- case art -%}
+    {%- when 'cow' -%}
+      <g class="art__sway">
+        <path d="M14 236c2-16-2-26-8-36M30 236c0-14 4-24 12-32M46 236c-2-12-8-20-16-26M194 236c2-16-2-26-8-36M210 236c0-14 4-24 12-32M226 236c-2-12-8-20-16-26" stroke="#4F5D33"/>
+      </g>
+      <path d="M84 66C70 60 60 44 66 28c8 16 18 24 30 28" fill="#D9A440"/>
+      <path d="M156 66c14-6 24-22 18-38-8 16-18 24-30 28" fill="#D9A440"/>
+      <path d="M84 80c-20-6-34 4-40 16 16 4 30 0 40-6" fill="#FBF7EE"/>
+      <path d="M156 80c20-6 34 4 40 16-16 4-30 0-40-6" fill="#FBF7EE"/>
+      <path d="M80 72c0-24 80-24 80 0l-4 70c-2 30-18 50-36 50s-34-20-36-50l-4-70Z" fill="#FBF7EE"/>
+      <path d="M128 58c18 2 24 22 12 34-8-8-16-18-12-34Z" fill="#17120D" stroke="none"/>
+      <ellipse cx="120" cy="168" rx="30" ry="22" fill="#E8C3A0"/>
+      <ellipse cx="110" cy="170" rx="4" ry="3" fill="#17120D"/>
+      <ellipse cx="130" cy="170" rx="4" ry="3" fill="#17120D"/>
+      <g class="art__blink">
+        <circle cx="101" cy="112" r="4.5" fill="#17120D" stroke="none"/>
+        <circle cx="139" cy="112" r="4.5" fill="#17120D" stroke="none"/>
+      </g>
+      <path d="M104 192c8 6 24 6 32 0"/>
+      <circle class="art__bell" cx="120" cy="206" r="8" fill="#D9A440"/>
+    {%- when 'curd' -%}
+      <path class="art__twinkle" d="M50 30v14M43 37h14" stroke="#D9A440"/>
+      <path class="art__twinkle art__twinkle--2" d="M92 16v10M87 21h10" stroke="#D9A440"/>
+      <path class="art__twinkle art__twinkle--3" d="M146 44v10M141 49h10" stroke="#D9A440"/>
+      <path class="art__moon" d="M196 26a26 26 0 1 0 8 46 20 20 0 1 1-8-46Z" fill="#D9A440"/>
+      <path d="M70 120c-20 20-20 80 20 94h60c40-14 40-74 20-94Z" fill="#C9773F"/>
+      <path d="M64 162c34 12 78 12 112 0" stroke="#FBF7EE" stroke-opacity=".7"/>
+      <path d="M68 178c34 10 70 10 104 0" stroke="#FBF7EE" stroke-opacity=".45" stroke-dasharray="2 8"/>
+      <ellipse cx="120" cy="120" rx="52" ry="10" fill="#A55E2E"/>
+      <ellipse class="art__curd" cx="120" cy="120" rx="43" ry="6.5" fill="#FFF8E8"/>
+    {%- when 'churn' -%}
+      <g class="art__splash">
+        <circle cx="98" cy="96" r="3" fill="#FFF8E8"/>
+        <circle cx="144" cy="92" r="2.5" fill="#FFF8E8"/>
+        <circle cx="126" cy="86" r="2" fill="#FFF8E8"/>
+      </g>
+      <path d="M78 110c-18 20-16 90 18 104h48c34-14 36-84 18-104Z" fill="#C9773F"/>
+      <path d="M70 160c32 10 68 10 100 0" stroke="#FBF7EE" stroke-opacity=".6"/>
+      <ellipse cx="120" cy="110" rx="44" ry="9" fill="#A55E2E"/>
+      <ellipse cx="120" cy="110" rx="36" ry="5.5" fill="#FFF8E8"/>
+      <g class="art__stick">
+        <rect x="115" y="18" width="10" height="96" rx="5" fill="#8A5A2B"/>
+        <circle cx="120" cy="20" r="8" fill="#8A5A2B"/>
+      </g>
+      <path class="art__rope" d="M20 64c30-6 66-4 95-2m10 6c26 2 58 0 96 6" stroke="#E8C3A0" stroke-width="3" stroke-dasharray="6 5"/>
+      <path d="M114 54h12M114 62h12M114 70h12" stroke="#E8C3A0" stroke-width="3"/>
+    {%- when 'butter' -%}
+      <path class="art__twinkle" d="M48 70v14M41 77h14" stroke="#D9A440"/>
+      <path class="art__twinkle art__twinkle--2" d="M190 58v12M184 64h12" stroke="#D9A440"/>
+      <path class="art__twinkle art__twinkle--3" d="M174 112v10M169 117h10" stroke="#D9A440"/>
+      <path d="M50 140c4 56 136 56 140 0Z" fill="#C9773F"/>
+      <ellipse cx="120" cy="140" rx="70" ry="12" fill="#A55E2E"/>
+      <path class="art__butter" d="M80 142c-6-26 20-40 36-28 8-18 42-12 40 10 18 2 18 20 6 20Z" fill="#FFF6DC"/>
+      <path d="M104 126c6-4 14-4 18 0" stroke-opacity=".4"/>
+    {%- when 'fire' -%}
+      <g class="art__steam">
+        <path d="M92 92c-6-10 6-16 0-26s6-16 0-26"/>
+        <path d="M120 86c-6-10 6-16 0-26s6-16 0-26"/>
+        <path d="M148 92c-6-10 6-16 0-26s6-16 0-26"/>
+      </g>
+      <path d="M40 120c8 50 152 50 160 0Z" fill="#3B3029"/>
+      <circle cx="34" cy="122" r="8"/>
+      <circle cx="206" cy="122" r="8"/>
+      <ellipse cx="120" cy="120" rx="80" ry="11" fill="#D9A440"/>
+      <g class="art__bubbles" stroke="none" fill="#FFF1C2">
+        <circle cx="94" cy="120" r="3"/><circle cx="130" cy="118" r="2.4"/><circle cx="152" cy="122" r="2"/><circle cx="110" cy="123" r="1.8"/>
+      </g>
+      <g class="art__flames">
+        <path class="art__flame" d="M96 214c-14-6-14-24 0-40 2 10 8 12 8 20 4-6 4-10 2-16 12 10 12 30-10 36Z" fill="#E9A23B"/>
+        <path class="art__flame art__flame--2" d="M120 216c-18-8-18-30 0-50 2 12 10 16 10 26 5-8 5-12 3-20 14 14 14 36-13 44Z" fill="#D9592B"/>
+        <path class="art__flame art__flame--3" d="M144 214c-14-6-14-24 0-40 2 10 8 12 8 20 4-6 4-10 2-16 12 10 12 30-10 36Z" fill="#E9A23B"/>
+      </g>
+      <path d="M70 226l100-10M70 216l100 10" stroke="#8A5A2B" stroke-width="7"/>
+  {%- endcase -%}
+</svg>
+{%- endif -%}

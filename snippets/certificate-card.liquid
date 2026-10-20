@@ -1,0 +1,45 @@
+{%- comment -%}
+  Certificate card with a wax-seal stamp. Params: block, index
+{%- endcomment -%}
+{%- liquid
+  assign b = block.settings
+  assign seal_uid = 'seal-' | append: block.id
+  assign img_src = ''
+  if b.image != blank
+    assign img_src = b.image | image_url: width: 1600
+  endif
+-%}
+<article class="cert" data-cert {{ block.shopify_attributes }}>
+  <div class="cert__paper">
+    <div class="cert__top">
+      <span class="cert__issuer">{{ b.issuer }}</span>
+      {%- if b.date != blank -%}<span class="cert__date">{{ b.date }}</span>{%- endif -%}
+    </div>
+    <div class="cert__media">
+      {%- if b.image != blank -%}
+        {{ b.image | image_url: width: 640 | image_tag: loading: 'lazy', alt: b.title, class: 'cert__img' }}
+      {%- else -%}
+        <svg class="cert__placeholder" viewBox="0 0 200 120" aria-hidden="true">
+          <rect x="10" y="10" width="180" height="100" rx="4" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="4 4"/>
+          <rect x="30" y="28" width="90" height="7" rx="3" fill="currentColor" opacity=".25"/>
+          <rect x="30" y="44" width="140" height="4" rx="2" fill="currentColor" opacity=".15"/>
+          <rect x="30" y="54" width="120" height="4" rx="2" fill="currentColor" opacity=".15"/>
+          <rect x="30" y="64" width="132" height="4" rx="2" fill="currentColor" opacity=".15"/>
+          <rect x="30" y="86" width="50" height="3" rx="1.5" fill="currentColor" opacity=".3"/>
+        </svg>
+      {%- endif -%}
+    </div>
+    <h3 class="cert__title">{{ b.title }}</h3>
+    {%- if b.number != blank -%}<p class="cert__number">{{ b.number }}</p>{%- endif -%}
+    {%- if img_src != blank or b.file_url != blank -%}
+      <button type="button" class="cert__view link-underline" data-lightbox-open data-src="{{ img_src }}" data-file="{{ b.file_url }}" data-title="{{ b.title | escape }}">
+        View certificate {% render 'icon', name: 'arrow-up-right', size: 14 %}
+      </button>
+    {%- else -%}
+      <span class="cert__view cert__view--muted">Certificate on request</span>
+    {%- endif -%}
+  </div>
+  <div class="cert__seal" data-cert-seal>
+    {% render 'wax-seal', uid: seal_uid, mark: b.seal_mark, text: b.seal_text, tone: b.seal_tone %}
+  </div>
+</article>

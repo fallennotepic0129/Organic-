@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Contact",
+        "heading": "Questions? Orders? Just salaam?",
+        "text": "We reply fastest on WhatsApp.",
+        "art": "ghee"
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "form"
+  ]
+}

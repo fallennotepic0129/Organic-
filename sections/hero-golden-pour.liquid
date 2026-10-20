@@ -1,0 +1,122 @@
+{%- liquid
+  assign product = section.settings.product
+  assign uid = 'gp-' | append: section.id
+-%}
+<section class="gp" data-scene="golden-pour" data-pin-length="{{ section.settings.pin_length }}">
+  <div class="gp__pin" data-gp-pin>
+    <div class="gp__bg" aria-hidden="true">
+      <div class="gp__glow" data-gp-glow></div>
+      <div class="gp__rays"></div>
+    </div>
+
+    <div class="gp__giant" aria-hidden="true">
+      <span data-gp-giant>{{ section.settings.giant_word }}</span>
+    </div>
+
+    <div class="gp__copy">
+      <p class="eyebrow" data-gp-intro>{{ section.settings.eyebrow }}</p>
+      <h1 class="gp__title" data-gp-title>
+        <span class="gp__line">{{ section.settings.heading_1 }}</span>
+        <span class="gp__line gp__line--accent"><em>{{ section.settings.heading_2 }}</em></span>
+      </h1>
+      <p class="gp__sub" data-gp-intro>{{ section.settings.subheading }}</p>
+      <div class="gp__badges" data-gp-intro>
+        <span>{% render 'icon', name: 'flask', size: 16 %} Lab tested</span>
+        <span>{% render 'icon', name: 'cash', size: 16 %} Cash on delivery</span>
+      </div>
+    </div>
+
+    <div class="gp__stage" data-gp-stage>
+      <svg class="gp__svg" viewBox="-80 -40 460 680" overflow="visible" role="img" aria-label="Golden desi ghee being poured into a glass jar">
+        <defs>
+          <linearGradient id="{{ uid }}-brass" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F3D99A"/>
+            <stop offset=".45" stop-color="#B8892F"/>
+            <stop offset="1" stop-color="#6E4A14"/>
+          </linearGradient>
+        </defs>
+        <g class="gp__ladle" data-gp-ladle>
+          <path d="M82 90 L-46 -2 Q-56 -10 -48 -18 Q-40 -24 -32 -16 L90 82 Z" fill="url(#{{ uid }}-brass)" stroke="#5E400F" stroke-opacity=".5" stroke-width="1.5"/>
+          <circle cx="-44" cy="-12" r="5" fill="#17120D" opacity=".35"/>
+          <path d="M72 96 Q76 142 113 142 Q150 142 156 98 Z" fill="url(#{{ uid }}-brass)" stroke="#5E400F" stroke-opacity=".6" stroke-width="1.5"/>
+          <ellipse cx="114" cy="97" rx="42" ry="6.5" fill="#E9B74E"/>
+          <ellipse cx="104" cy="96" rx="16" ry="2" fill="#FFF1C2" opacity=".8"/>
+          <path d="M84 112 Q100 132 126 128" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <g transform="translate(0 240)">
+          {% render 'jar-ghee', uid: uid, stream: true, as_group: true, title: section.settings.label_title, subtitle: section.settings.label_subtitle %}
+        </g>
+      </svg>
+
+      <div class="gp__notes">
+        {%- for block in section.blocks -%}
+          <div class="gp__note" data-gp-note {{ block.shopify_attributes }}>
+            <span class="gp__note-line" aria-hidden="true"></span>
+            <span class="gp__note-dot" aria-hidden="true"></span>
+            <span class="gp__note-text">
+              <strong>{{ block.settings.title }}</strong>
+              {%- if block.settings.text != blank -%}<span>{{ block.settings.text }}</span>{%- endif -%}
+            </span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="gp__card" data-gp-card>
+      {% render 'product-card', product: product, eyebrow: section.settings.card_eyebrow, blurb: section.settings.card_blurb, tone: 'light' %}
+    </div>
+
+    <div class="gp__meter" aria-hidden="true" data-gp-intro>
+      <span class="gp__meter-label">Poured</span>
+      <span class="gp__meter-value"><span data-gp-meter>100</span>%</span>
+    </div>
+    <div class="gp__cue" aria-hidden="true" data-gp-intro>
+      <span>Scroll to pour</span>
+      <span class="gp__cue-line"></span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero — Golden pour",
+  "tag": "div",
+  "class": "section-gp",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Mian Dairies · Est. on the farm" },
+    { "type": "text", "id": "heading_1", "label": "Heading line 1", "default": "Pure. Slow." },
+    { "type": "text", "id": "heading_2", "label": "Heading line 2", "default": "Golden." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Desi ghee hand-churned the bilona way from grass-fed cows — slow-cooked over a wood fire until it turns to liquid gold." },
+    { "type": "text", "id": "giant_word", "label": "Giant background word", "default": "Desi Ghee" },
+    { "type": "text", "id": "label_title", "label": "Jar label title", "default": "Desi Ghee" },
+    { "type": "text", "id": "label_subtitle", "label": "Jar label subtitle", "default": "Bilona · Hand-churned" },
+    { "type": "header", "content": "Product card" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "card_eyebrow", "label": "Card eyebrow", "default": "Freshly jarred this week" },
+    { "type": "textarea", "id": "card_blurb", "label": "Card text", "default": "Danedar texture, nutty aroma, nothing added. Made in small batches." },
+    { "type": "range", "id": "pin_length", "label": "Scroll length of the animation", "min": 150, "max": 400, "step": 10, "unit": "%", "default": 260 }
+  ],
+  "blocks": [
+    {
+      "type": "note",
+      "name": "Callout",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Hand-churned" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Bilona method, curd not cream" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero — Golden pour",
+      "blocks": [
+        { "type": "note", "settings": { "title": "Grass-fed cows", "text": "Fresh A2 milk from our own herd" } },
+        { "type": "note", "settings": { "title": "Hand-churned", "text": "Bilona method — from curd, not cream" } },
+        { "type": "note", "settings": { "title": "Wood-fire slow cooked", "text": "For that danedar texture and aroma" } },
+        { "type": "note", "settings": { "title": "Nothing added", "text": "No colour, no preservatives, ever" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

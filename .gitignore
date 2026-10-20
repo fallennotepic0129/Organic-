@@ -1,0 +1,3 @@
+node_modules/
+dev/preview/dist/
+.DS_Store

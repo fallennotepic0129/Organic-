@@ -1,0 +1,62 @@
+<section class="lab" data-scene="lab">
+  <div class="container lab__grid">
+    <div class="lab__meta">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2" data-split>{{ section.settings.heading }}</h2>
+      <dl class="lab__facts" data-reveal>
+        {%- if section.settings.lab != blank -%}<div><dt>Laboratory</dt><dd>{{ section.settings.lab }}</dd></div>{%- endif -%}
+        {%- if section.settings.batch != blank -%}<div><dt>Batch</dt><dd>{{ section.settings.batch }}</dd></div>{%- endif -%}
+        {%- if section.settings.date != blank -%}<div><dt>Tested</dt><dd>{{ section.settings.date }}</dd></div>{%- endif -%}
+      </dl>
+      {%- if section.settings.file_url != blank -%}
+        <a class="btn btn--outline" href="{{ section.settings.file_url }}" target="_blank" rel="noopener" data-magnetic>{% render 'icon', name: 'document', size: 16 %}<span class="btn__label">Download full report</span></a>
+      {%- endif -%}
+    </div>
+    <div class="lab__table" role="table" aria-label="{{ section.settings.heading | escape }}">
+      <div class="lab__row lab__row--head" role="row">
+        <span role="columnheader">Test</span><span role="columnheader">Result</span><span role="columnheader">Standard</span><span role="columnheader" class="visually-hidden">Status</span>
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="lab__row" role="row" data-lab-row {{ block.shopify_attributes }}>
+          <span role="cell" class="lab__test">{{ block.settings.test }}</span>
+          <span role="cell" class="lab__result">{{ block.settings.result }}</span>
+          <span role="cell" class="lab__standard">{{ block.settings.standard }}</span>
+          <span role="cell" class="lab__status{% if block.settings.pass %} is-pass{% endif %}">
+            {%- if block.settings.pass -%}
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-label="Pass"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path class="lab__tick" d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {%- endif -%}
+          </span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lab results table",
+  "tag": "div",
+  "class": "section-lab",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Desi ghee" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Purity analysis" },
+    { "type": "text", "id": "lab", "label": "Laboratory name" },
+    { "type": "text", "id": "batch", "label": "Batch number" },
+    { "type": "text", "id": "date", "label": "Test date" },
+    { "type": "url", "id": "file_url", "label": "Full report (PDF link)" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Test",
+      "settings": [
+        { "type": "text", "id": "test", "label": "Test", "default": "Test name" },
+        { "type": "text", "id": "result", "label": "Result", "default": "—" },
+        { "type": "text", "id": "standard", "label": "Standard / limit", "default": "—" },
+        { "type": "checkbox", "id": "pass", "label": "Passed", "default": true }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Lab results table", "blocks": [ { "type": "row" }, { "type": "row" }, { "type": "row" } ] } ]
+}
+{% endschema %}

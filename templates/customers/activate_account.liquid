@@ -1,0 +1,13 @@
+<section class="account">
+  <div class="container container--narrow">
+    <div class="card account__card">
+      <h1 class="h2">Activate your account</h1>
+      {%- form 'activate_customer_password', class: 'form' -%}
+        {{ form.errors | default_errors }}
+        <label class="field"><span>Password</span><input type="password" name="customer[password]" autocomplete="new-password" required></label>
+        <label class="field"><span>Confirm password</span><input type="password" name="customer[password_confirmation]" autocomplete="new-password" required></label>
+        <button type="submit" class="btn btn--ink btn--block"><span class="btn__label">Activate account</span></button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

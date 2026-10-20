@@ -1,0 +1,376 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-golden-pour",
+      "settings": {
+        "product": "desi-ghee",
+        "pin_length": 260
+      },
+      "blocks": {
+        "note_1": {
+          "type": "note",
+          "settings": {
+            "title": "Grass-fed cows",
+            "text": "Fresh whole milk from free-grazing cows"
+          }
+        },
+        "note_2": {
+          "type": "note",
+          "settings": {
+            "title": "Hand-churned",
+            "text": "Bilona method — from curd, not cream"
+          }
+        },
+        "note_3": {
+          "type": "note",
+          "settings": {
+            "title": "Wood-fire slow cooked",
+            "text": "For that danedar texture and aroma"
+          }
+        },
+        "note_4": {
+          "type": "note",
+          "settings": {
+            "title": "Nothing added",
+            "text": "No colour, no preservatives, ever"
+          }
+        }
+      },
+      "block_order": [
+        "note_1",
+        "note_2",
+        "note_3",
+        "note_4"
+      ]
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {
+        "style": "gold",
+        "speed": 26
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Bilona hand-churned"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Lab tested every batch"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Himalayan shilajit"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Cash on delivery"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "text": "Nothing added"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+      ]
+    },
+    "duo": {
+      "type": "product-duo",
+      "settings": {
+        "product_1": "desi-ghee",
+        "product_2": "shilajit"
+      }
+    },
+    "bilona": {
+      "type": "bilona-process",
+      "settings": {},
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "art": "cow",
+            "title": "Grass-fed milk",
+            "text": "Fresh whole milk from free-grazing cows, milked at dawn.",
+            "meta": "5:00 am"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "art": "curd",
+            "title": "Set overnight",
+            "text": "Boiled, cooled and set into curd in clay matkas.",
+            "meta": "12 hours"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "art": "churn",
+            "title": "Hand-churned",
+            "text": "The curd is churned with a wooden madhani until makhan rises.",
+            "meta": "Both directions, by hand"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "art": "butter",
+            "title": "Makhan",
+            "text": "White butter is lifted, washed and gathered — nothing else goes in.",
+            "meta": "Pure makhan only"
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "art": "fire",
+            "title": "Slow-cooked",
+            "text": "Simmered over a low wood fire until golden and danedar.",
+            "meta": "3–4 hours"
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "art": "jar",
+            "title": "Jarred warm",
+            "text": "Filtered, jarred warm and sealed. Batch number on every lid.",
+            "meta": "Same day"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6"
+      ]
+    },
+    "peaks": {
+      "type": "shilajit-peaks",
+      "settings": {
+        "product": "shilajit",
+        "pin_length": 320
+      },
+      "blocks": {
+        "caption_1": {
+          "type": "caption",
+          "settings": {
+            "title": "Harvested at altitude.",
+            "text": "Gathered by hand from sun-warmed cliffs in the summer months."
+          }
+        },
+        "caption_2": {
+          "type": "caption",
+          "settings": {
+            "title": "Purified slowly.",
+            "text": "Dissolved, filtered and sun-dried — no heat shortcuts."
+          }
+        },
+        "caption_3": {
+          "type": "caption",
+          "settings": {
+            "title": "Drop by drop.",
+            "text": "Every jar is batch-tested before it leaves us."
+          }
+        }
+      },
+      "block_order": [
+        "caption_1",
+        "caption_2",
+        "caption_3"
+      ]
+    },
+    "purity": {
+      "type": "purity-reveal",
+      "settings": {
+        "cta_link": "/pages/lab-reports"
+      },
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "value": 100,
+            "suffix": "%",
+            "label": "Pure desi ghee",
+            "note": "No vegetable oil, colour or preservative"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "value": 0,
+            "suffix": "",
+            "label": "Additives",
+            "note": "In either product. Ever."
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "value": 30,
+            "suffix": " L",
+            "label": "Milk per jar",
+            "note": "Approx. for 1 kg of bilona ghee"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "value": 4200,
+            "suffix": " m",
+            "label": "Shilajit harvest altitude",
+            "note": "Gilgit-Baltistan"
+          }
+        },
+        "certificate_5": {
+          "type": "certificate",
+          "settings": {
+            "issuer": "Punjab Food Authority",
+            "title": "Food business licence",
+            "seal_mark": "PFA",
+            "seal_text": "LICENSED · FOOD AUTHORITY · ",
+            "seal_tone": "wax"
+          }
+        },
+        "certificate_6": {
+          "type": "certificate",
+          "settings": {
+            "issuer": "Independent laboratory",
+            "title": "Ghee purity analysis",
+            "seal_mark": "LAB",
+            "seal_text": "LAB TESTED · BATCH VERIFIED · ",
+            "seal_tone": "gold"
+          }
+        },
+        "certificate_7": {
+          "type": "certificate",
+          "settings": {
+            "issuer": "Independent laboratory",
+            "title": "Shilajit heavy-metal & purity report",
+            "seal_mark": "LAB",
+            "seal_text": "HEAVY METALS · FULVIC ACID · ",
+            "seal_tone": "wax"
+          }
+        },
+        "certificate_8": {
+          "type": "certificate",
+          "settings": {
+            "issuer": "Halal certification body",
+            "title": "Halal certificate",
+            "seal_mark": "حلال",
+            "seal_text": "HALAL · CERTIFIED · ",
+            "seal_tone": "gold"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "certificate_5",
+        "certificate_6",
+        "certificate_7",
+        "certificate_8"
+      ]
+    },
+    "bundle": {
+      "type": "bundle-offer",
+      "settings": {
+        "product": "ghee-shilajit-bundle"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {},
+      "blocks": {},
+      "block_order": []
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {},
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer cash on delivery?",
+            "answer": "<p>Yes. Cash on Delivery is available across Pakistan. You can also pay by bank transfer, JazzCash or Easypaisa.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Most orders arrive in 2–5 working days. Major cities are usually faster. You'll get a tracking number by SMS/WhatsApp once your parcel ships.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What makes bilona ghee different?",
+            "answer": "<p>Bilona ghee is made from curd that is hand-churned into makhan, then slow-cooked. Most commercial ghee is made from cream. The bilona method gives a grainy (danedar) texture and a deeper aroma.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "How can I tell if shilajit is pure?",
+            "answer": "<p>Pure resin softens in warm hands and hardens in the fridge, dissolves fully in warm water leaving no grit, and smells smoky and earthy. Every batch of ours is also lab tested — see the Lab Reports page.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store ghee and shilajit?",
+            "answer": "<p>Keep both in a cool, dry place with the lid closed and always use a dry spoon.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return or exchange an order?",
+            "answer": "<p>If your jar arrives damaged or isn't right, message us within 48 hours of delivery with a photo and we'll replace it. See our refund policy for details.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "duo",
+    "bilona",
+    "peaks",
+    "purity",
+    "bundle",
+    "reviews",
+    "faq"
+  ]
+}

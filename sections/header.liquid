@@ -1,0 +1,79 @@
+{%- liquid
+  assign menu = linklists[section.settings.menu]
+  assign brand = settings.brand_name | default: shop.name
+-%}
+<header class="site-header{% if section.settings.overlay and template.name == 'index' %} site-header--overlay{% endif %}" data-header>
+  <div class="site-header__inner container">
+    <button class="site-header__burger" type="button" aria-label="{{ 'general.menu' | t }}" aria-expanded="false" aria-controls="MobileMenu" data-menu-toggle>
+      <span></span><span></span>
+    </button>
+
+    <a class="site-header__logo" href="{{ routes.root_url }}" aria-label="{{ brand | escape }}">
+      {%- if settings.logo != blank -%}
+        {{ settings.logo | image_url: width: 480 | image_tag: class: 'site-header__logo-img', alt: brand, loading: 'eager', style: 'width: var(--logo-width); height: auto;' }}
+      {%- else -%}
+        <span class="wordmark"><span class="wordmark__drop" aria-hidden="true"></span><em>Mian</em> Dairies</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="site-nav" aria-label="Main">
+      <ul class="site-nav__list">
+        {%- if menu.links.size > 0 -%}
+          {%- for link in menu.links -%}
+            <li><a class="site-nav__link{% if link.active %} is-active{% endif %}" href="{{ link.url }}"><span data-text="{{ link.title | escape }}">{{ link.title }}</span></a></li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a class="site-nav__link" href="{{ routes.all_products_collection_url }}"><span data-text="Shop">Shop</span></a></li>
+          <li><a class="site-nav__link" href="/pages/lab-reports"><span data-text="Lab Reports">Lab Reports</span></a></li>
+          <li><a class="site-nav__link" href="/pages/our-story"><span data-text="Our Story">Our Story</span></a></li>
+          <li><a class="site-nav__link" href="/pages/reviews"><span data-text="Reviews">Reviews</span></a></li>
+          <li><a class="site-nav__link" href="/pages/faq"><span data-text="FAQ">FAQ</span></a></li>
+        {%- endif -%}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="icon-btn hide-sm" href="/pages/track-order" aria-label="Track order">{% render 'icon', name: 'truck', size: 20 %}</a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="icon-btn hide-sm" href="{{ routes.account_url }}" aria-label="{{ 'general.account' | t }}">{% render 'icon', name: 'user', size: 20 %}</a>
+      {%- endif -%}
+      <a class="icon-btn cart-btn" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart' | t }}" data-cart-open>
+        {% render 'icon', name: 'cart', size: 21 %}
+        <span class="cart-btn__count{% if cart.item_count == 0 %} is-empty{% endif %}" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="MobileMenu" data-mobile-menu aria-hidden="true" data-lenis-prevent>
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <ul>
+        {%- if menu.links.size > 0 -%}
+          {%- for link in menu.links -%}
+            <li><a href="{{ link.url }}"><span class="mobile-menu__index">0{{ forloop.index }}</span>{{ link.title }}</a></li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a href="{{ routes.all_products_collection_url }}"><span class="mobile-menu__index">01</span>Shop</a></li>
+          <li><a href="/pages/lab-reports"><span class="mobile-menu__index">02</span>Lab Reports</a></li>
+          <li><a href="/pages/our-story"><span class="mobile-menu__index">03</span>Our Story</a></li>
+          <li><a href="/pages/reviews"><span class="mobile-menu__index">04</span>Reviews</a></li>
+          <li><a href="/pages/faq"><span class="mobile-menu__index">05</span>FAQ</a></li>
+        {%- endif -%}
+        <li><a href="/pages/track-order"><span class="mobile-menu__index">→</span>Track order</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu__foot">
+      <p>{{ settings.cod_note }}</p>
+      {%- if settings.contact_phone != blank -%}<a href="tel:{{ settings.contact_phone | remove: ' ' }}">{{ settings.contact_phone }}</a>{%- endif -%}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "overlay", "label": "Float over the homepage hero", "default": true }
+  ]
+}
+{% endschema %}

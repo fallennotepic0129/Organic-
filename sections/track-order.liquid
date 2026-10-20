@@ -1,0 +1,68 @@
+<section class="track" data-scene="track">
+  <div class="container track__grid">
+    <div class="track__art" aria-hidden="true">
+      <svg viewBox="0 0 400 200" class="track__road">
+        <path d="M10 160 C110 120 170 190 260 140 S 360 110 390 120" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="2" stroke-dasharray="6 8"/>
+        <path class="track__route" d="M10 160 C110 120 170 190 260 140 S 360 110 390 120" fill="none" stroke="#D9A440" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="10" cy="160" r="7" fill="#17120D"/>
+        <g transform="translate(372 88)"><path d="M18 2c8 0 14 6 14 14 0 10-14 22-14 22S4 26 4 16C4 8 10 2 18 2Z" fill="#D9A440"/><circle cx="18" cy="16" r="5" fill="#FBF7EE"/></g>
+      </svg>
+    </div>
+    <div class="track__card card">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="h2" data-split>{{ section.settings.heading }}</h1>
+      <p class="track__text">{{ section.settings.text }}</p>
+      <form class="form" data-track-form>
+        <label class="field">
+          <span>Courier</span>
+          <select name="courier" required>
+            {%- for block in section.blocks -%}
+              <option value="{{ block.settings.url | escape }}" {{ block.shopify_attributes }}>{{ block.settings.name }}</option>
+            {%- endfor -%}
+          </select>
+        </label>
+        <label class="field">
+          <span>Tracking number</span>
+          <input type="text" name="tracking" required autocomplete="off" placeholder="e.g. 1234567890">
+        </label>
+        <button type="submit" class="btn btn--ink" data-magnetic><span class="btn__label">Track parcel</span>{% render 'icon', name: 'arrow-up-right', size: 16 %}</button>
+      </form>
+      <div class="track__alt">
+        <p>Don't have a tracking number yet?</p>
+        <div class="track__alt-actions">
+          {%- assign wa_number = settings.whatsapp_number | remove: '+' | remove: ' ' -%}
+          {%- if wa_number != blank -%}
+            <a class="btn btn--whatsapp" href="https://wa.me/{{ wa_number }}?text={{ 'Assalam o Alaikum! Could you share the status of my order #' | url_encode }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp', size: 18 %}<span class="btn__label">Ask on WhatsApp</span></a>
+          {%- endif -%}
+          {%- if shop.customer_accounts_enabled -%}
+            <a class="btn btn--outline" href="{{ routes.account_url }}"><span class="btn__label">View my orders</span></a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Track order",
+  "tag": "div",
+  "class": "section-track",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Where's my jar?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Track your order" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Pick your courier and enter the tracking number we sent you by SMS / WhatsApp." }
+  ],
+  "blocks": [
+    {
+      "type": "courier",
+      "name": "Courier",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Courier name", "default": "Courier" },
+        { "type": "text", "id": "url", "label": "Tracking URL", "info": "Use {n} where the tracking number goes. Check this link with a real tracking number before going live." }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Track order" } ]
+}
+{% endschema %}

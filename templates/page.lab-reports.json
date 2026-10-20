@@ -1,0 +1,198 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Lab reports & certificates",
+        "heading": "Nothing to hide.",
+        "text": "Our licences, certificates and the lab results for every product — in one place. Questions about a batch? Ask us on WhatsApp with the batch number from your lid.",
+        "art": "seal"
+      }
+    },
+    "certs": {
+      "type": "purity-reveal",
+      "settings": {
+        "eyebrow": "Certificates",
+        "heading": "Licensed, tested and certified.",
+        "text": "Tap any certificate to view the full document.",
+        "cta_label": ""
+      },
+      "blocks": {
+        "certificate_1": {
+          "type": "certificate",
+          "settings": {
+            "issuer": "Punjab Food Authority",
+            "title": "Food business licence",
+            "seal_mark": "PFA",
+            "seal_text": "LICENSED · FOOD AUTHORITY · ",
+            "seal_tone": "wax"
+          }
+        },
+        "certificate_2": {
+          "type": "certificate",
+          "settings": {
+            "issuer": "Independent laboratory",
+            "title": "Ghee purity analysis",
+            "seal_mark": "LAB",
+            "seal_text": "LAB TESTED · BATCH VERIFIED · ",
+            "seal_tone": "gold"
+          }
+        },
+        "certificate_3": {
+          "type": "certificate",
+          "settings": {
+            "issuer": "Independent laboratory",
+            "title": "Shilajit heavy-metal & purity report",
+            "seal_mark": "LAB",
+            "seal_text": "HEAVY METALS · FULVIC ACID · ",
+            "seal_tone": "wax"
+          }
+        },
+        "certificate_4": {
+          "type": "certificate",
+          "settings": {
+            "issuer": "Halal certification body",
+            "title": "Halal certificate",
+            "seal_mark": "حلال",
+            "seal_text": "HALAL · CERTIFIED · ",
+            "seal_tone": "gold"
+          }
+        }
+      },
+      "block_order": [
+        "certificate_1",
+        "certificate_2",
+        "certificate_3",
+        "certificate_4"
+      ]
+    },
+    "ghee": {
+      "type": "lab-results",
+      "settings": {
+        "eyebrow": "Desi ghee",
+        "heading": "Ghee purity analysis"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "test": "Moisture",
+            "result": "—",
+            "standard": "Per PFA standard",
+            "pass": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "test": "Free fatty acids",
+            "result": "—",
+            "standard": "Per PFA standard",
+            "pass": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "test": "B.R. reading at 40 °C",
+            "result": "—",
+            "standard": "Per PFA standard",
+            "pass": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "test": "Vegetable oil (adulteration)",
+            "result": "—",
+            "standard": "Not detected",
+            "pass": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "test": "Added colour",
+            "result": "—",
+            "standard": "Not detected",
+            "pass": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ]
+    },
+    "shilajit": {
+      "type": "lab-results",
+      "settings": {
+        "eyebrow": "Shilajit",
+        "heading": "Purity & heavy-metal analysis"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "test": "Fulvic acid",
+            "result": "—",
+            "standard": "Per lab report",
+            "pass": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "test": "Lead (Pb)",
+            "result": "—",
+            "standard": "Within safe limit",
+            "pass": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "test": "Mercury (Hg)",
+            "result": "—",
+            "standard": "Within safe limit",
+            "pass": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "test": "Arsenic (As)",
+            "result": "—",
+            "standard": "Within safe limit",
+            "pass": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "test": "Solubility in water",
+            "result": "—",
+            "standard": "Fully soluble",
+            "pass": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "certs",
+    "ghee",
+    "shilajit"
+  ]
+}

@@ -1,0 +1,58 @@
+{%- liquid
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count
+  assign has_app = false
+  for block in section.blocks
+    if block.type == '@app'
+      assign has_app = true
+    endif
+  endfor
+-%}
+<section class="previews" id="reviews">
+  <div class="container">
+    <div class="previews__head">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="h2" data-split>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="previews__score" data-reveal>
+        {%- if rating != blank -%}
+          <p class="previews__big">{{ rating.rating | round: 1 }}</p>
+          {% render 'stars', rating: rating.rating, count: rating_count, size: 18 %}
+        {%- else -%}
+          <p class="previews__none">No reviews yet — be the first.</p>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if has_app -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}<div class="previews__app">{% render block %}</div>{%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      <div class="previews__fallback" data-reveal>
+        <p>{{ section.settings.fallback_text }}</p>
+        {%- assign wa_number = settings.whatsapp_number | remove: '+' | remove: ' ' -%}
+        {%- if wa_number != blank -%}
+          {%- capture review_msg -%}Assalam o Alaikum! I'd like to share a review of {{ product.title }}:{%- endcapture -%}
+          <a class="btn btn--whatsapp" href="https://wa.me/{{ wa_number }}?text={{ review_msg | url_encode }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp', size: 18 %}<span class="btn__label">Send us your review</span></a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product reviews",
+  "tag": "div",
+  "class": "section-product-reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What families are saying" },
+    { "type": "textarea", "id": "fallback_text", "label": "Text when no review app is added", "default": "Reviews are on their way. Tried it already? We'd love to hear from you." },
+    { "type": "paragraph", "content": "Add the Judge.me \"Review Widget\" app block here to show reviews with photos and the \"Write a review\" form." }
+  ],
+  "blocks": [ { "type": "@app" } ],
+  "presets": [ { "name": "Product reviews" } ]
+}
+{% endschema %}

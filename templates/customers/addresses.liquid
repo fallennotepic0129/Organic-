@@ -1,0 +1,36 @@
+<section class="account">
+  <div class="container container--narrow">
+    <p><a class="link-underline" href="{{ routes.account_url }}">← Back to account</a></p>
+    <h1 class="h2">Your addresses</h1>
+    {%- paginate customer.addresses by 10 -%}
+      {%- for address in customer.addresses -%}
+        <div class="card account__address">
+          {%- if address == customer.default_address -%}<p class="eyebrow">Default</p>{%- endif -%}
+          <p>{{ address | format_address }}</p>
+          {%- form 'customer_address', address, class: 'form' -%}
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="link-underline">Delete</button>
+          {%- endform -%}
+        </div>
+      {%- endfor -%}
+    {%- endpaginate -%}
+    <div class="card account__card">
+      <h2 class="h3">Add a new address</h2>
+      {%- form 'customer_address', customer.new_address, class: 'form' -%}
+        {{ form.errors | default_errors }}
+        <div class="form__row">
+          <label class="field"><span>First name</span><input type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name"></label>
+          <label class="field"><span>Last name</span><input type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name"></label>
+        </div>
+        <label class="field"><span>Address</span><input type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1"></label>
+        <div class="form__row">
+          <label class="field"><span>City</span><input type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2"></label>
+          <label class="field"><span>Phone</span><input type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel"></label>
+        </div>
+        <input type="hidden" name="address[country]" value="Pakistan">
+        <label class="checkbox"><input type="checkbox" name="address[default]" value="1"> Set as default address</label>
+        <button type="submit" class="btn btn--ink"><span class="btn__label">Save address</span></button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,108 @@
+{%- liquid
+  assign testimonials = section.blocks | where: 'type', 'testimonial'
+  assign has_app = false
+  for block in section.blocks
+    if block.type == '@app'
+      assign has_app = true
+    endif
+  endfor
+-%}
+<section class="reviews" data-scene="reviews">
+  <div class="container reviews__head">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2" data-split>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="reviews__summary" data-reveal>
+      {%- if section.settings.rating != blank -%}
+        <p class="reviews__score">{{ section.settings.rating }}</p>
+        {% render 'stars', rating: section.settings.rating, size: 20 %}
+        {%- if section.settings.rating_note != blank -%}<p class="reviews__note">{{ section.settings.rating_note }}</p>{%- endif -%}
+      {%- endif -%}
+      <a class="btn btn--ink" href="{{ section.settings.write_link | default: '/pages/reviews' }}" data-magnetic><span class="btn__label">Write a review</span>{% render 'icon', name: 'arrow-right', size: 16 %}</a>
+    </div>
+  </div>
+
+  {%- if has_app -%}
+    <div class="container reviews__app">
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if testimonials.size > 0 -%}
+    {%- assign half = testimonials.size | divided_by: 2 | at_least: 1 -%}
+    <div class="reviews__rows">
+      {%- for row in (1..2) -%}
+        {%- if row == 2 and testimonials.size < 4 -%}{%- break -%}{%- endif -%}
+        <div class="reviews__row" data-review-row data-direction="{% if row == 1 %}-1{% else %}1{% endif %}">
+          <div class="reviews__strip" data-review-strip>
+            {%- for pass in (1..2) -%}
+              {%- for block in testimonials -%}
+                {%- liquid
+                  assign in_row = 1
+                  if testimonials.size >= 4 and forloop.index > half
+                    assign in_row = 2
+                  endif
+                -%}
+                {%- if in_row == row -%}
+                  <figure class="review-card" {% if pass == 1 %}{{ block.shopify_attributes }}{% else %}aria-hidden="true"{% endif %}>
+                    <div class="review-card__top">
+                      {% render 'stars', rating: block.settings.rating, size: 14 %}
+                      {%- if block.settings.verified -%}<span class="review-card__verified">{% render 'icon', name: 'check', size: 12 %} Verified buyer</span>{%- endif -%}
+                    </div>
+                    <blockquote class="review-card__quote">{{ block.settings.quote }}</blockquote>
+                    <figcaption class="review-card__who">
+                      <span class="review-card__avatar" aria-hidden="true">{{ block.settings.name | slice: 0 }}</span>
+                      <span><strong>{{ block.settings.name }}</strong>{% if block.settings.city != blank %} · {{ block.settings.city }}{% endif %}<br><small>{{ block.settings.product_name }}</small></span>
+                    </figcaption>
+                  </figure>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- elsif has_app == false -%}
+    <div class="container">
+      <div class="reviews__empty" data-reveal>
+        {% render 'icon', name: 'quote', size: 36 %}
+        <p>Bought from us? Your honest review helps other families choose with confidence.</p>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "tag": "div",
+  "class": "section-reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Kind words" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Families who switched, and stayed." },
+    { "type": "text", "id": "rating", "label": "Average rating (e.g. 4.9)", "info": "Leave empty until you have real reviews." },
+    { "type": "text", "id": "rating_note", "label": "Rating note", "info": "e.g. \"from 214 verified reviews\"" },
+    { "type": "url", "id": "write_link", "label": "Write a review link", "info": "Defaults to /pages/reviews" },
+    { "type": "paragraph", "content": "Tip: add the Judge.me \"Reviews Carousel\" app block to show live reviews here, or add real testimonials below." }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Review" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "city", "label": "City" },
+        { "type": "text", "id": "product_name", "label": "Product" },
+        { "type": "checkbox", "id": "verified", "label": "Verified buyer", "default": true }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Reviews" } ]
+}
+{% endschema %}

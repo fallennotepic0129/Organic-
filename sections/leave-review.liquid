@@ -1,0 +1,56 @@
+<section class="leave">
+  <div class="container">
+    <div class="leave__steps">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'step' -%}
+          <div class="leave__step" data-reveal {{ block.shopify_attributes }}>
+            <span class="leave__num">{{ forloop.index }}</span>
+            <p><strong>{{ block.settings.title }}</strong> {{ block.settings.text }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="leave__grid">
+      {%- for product in section.settings.products -%}
+        {%- assign uid = 'lv-' | append: forloop.index -%}
+        <article class="leave__card" data-reveal data-tilt>
+          <div class="leave__jar" data-tilt-depth="30">{% render 'product-visual', product: product, uid: uid %}</div>
+          <h2 class="leave__title">{{ product.title }}</h2>
+          {%- assign rating = product.metafields.reviews.rating.value -%}
+          {%- if rating != blank -%}{% render 'stars', rating: rating.rating, count: product.metafields.reviews.rating_count %}{%- endif -%}
+          <a class="btn btn--ink" href="{{ product.url }}#judgeme_product_reviews" data-magnetic><span class="btn__label">Review {{ product.title }}</span>{% render 'icon', name: 'star', size: 16 %}</a>
+        </article>
+      {%- else -%}
+        <p class="leave__empty">Choose your products for this section in the theme editor.</p>
+      {%- endfor -%}
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == '@app' -%}<div class="leave__app">{% render block %}</div>{%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Leave a review",
+  "tag": "div",
+  "class": "section-leave",
+  "settings": [
+    { "type": "product_list", "id": "products", "label": "Products", "limit": 4 }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Pick your product." },
+        { "type": "text", "id": "text", "label": "Text", "default": "Choose the jar you bought below." }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Leave a review" } ]
+}
+{% endschema %}

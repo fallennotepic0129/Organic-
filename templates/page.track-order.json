@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "track": {
+      "type": "track-order",
+      "settings": {},
+      "blocks": {
+        "courier_1": {
+          "type": "courier",
+          "settings": {
+            "name": "TCS",
+            "url": "https://www.tcsexpress.com/track/{n}"
+          }
+        },
+        "courier_2": {
+          "type": "courier",
+          "settings": {
+            "name": "Leopards Courier",
+            "url": "https://www.leopardscourier.com/leopards-tracking?cn={n}"
+          }
+        },
+        "courier_3": {
+          "type": "courier",
+          "settings": {
+            "name": "PostEx",
+            "url": "https://postex.pk/tracking?cn={n}"
+          }
+        },
+        "courier_4": {
+          "type": "courier",
+          "settings": {
+            "name": "Pakistan Post",
+            "url": "https://ep.gov.pk/emtts/EPTrack_Live.aspx?ArticleIDz={n}"
+          }
+        }
+      },
+      "block_order": [
+        "courier_1",
+        "courier_2",
+        "courier_3",
+        "courier_4"
+      ]
+    }
+  },
+  "order": [
+    "track"
+  ]
+}

@@ -1,0 +1,26 @@
+<section class="account">
+  <div class="container">
+    <p class="eyebrow">My account</p>
+    <h1 class="h2">Assalam o Alaikum, {{ customer.first_name | default: customer.email }}</h1>
+    <p><a class="link-underline" href="{{ routes.account_logout_url }}">Log out</a> · <a class="link-underline" href="{{ routes.account_addresses_url }}">Addresses ({{ customer.addresses_count }})</a></p>
+    <h2 class="h3">Order history</h2>
+    {%- paginate customer.orders by 20 -%}
+      {%- if customer.orders.size > 0 -%}
+        <div class="orders card">
+          {%- for order in customer.orders -%}
+            <a class="orders__row" href="{{ order.customer_url }}">
+              <strong>{{ order.name }}</strong>
+              <span>{{ order.created_at | date: '%d %b %Y' }}</span>
+              <span>{{ order.financial_status_label }}</span>
+              <span>{{ order.fulfillment_status_label }}</span>
+              <span>{{ order.total_price | money_without_trailing_zeros }}</span>
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p>You haven't placed any orders yet.</p>
+      {%- endif -%}
+      {%- if paginate.pages > 1 -%}<nav class="pagination">{{ paginate | default_pagination }}</nav>{%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>

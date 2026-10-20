@@ -1,0 +1,10 @@
+<dialog class="lightbox" data-lightbox aria-label="Certificate">
+  <div class="lightbox__inner">
+    <div class="lightbox__head">
+      <p class="lightbox__title" data-lightbox-title></p>
+      <button type="button" class="icon-btn" data-lightbox-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close', size: 22 %}</button>
+    </div>
+    <div class="lightbox__body" data-lightbox-body data-lenis-prevent></div>
+    <a class="btn btn--ink lightbox__file" data-lightbox-file href="#" target="_blank" rel="noopener" hidden>{% render 'icon', name: 'document', size: 16 %} Open full document</a>
+  </div>
+</dialog>

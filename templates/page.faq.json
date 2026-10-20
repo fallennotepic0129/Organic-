@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Help",
+        "heading": "Frequently asked questions",
+        "art": "none"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Ask us anything."
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer cash on delivery?",
+            "answer": "<p>Yes. Cash on Delivery is available across Pakistan. You can also pay by bank transfer, JazzCash or Easypaisa.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Most orders arrive in 2–5 working days. Major cities are usually faster. You'll get a tracking number by SMS/WhatsApp once your parcel ships.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What makes bilona ghee different?",
+            "answer": "<p>Bilona ghee is made from curd that is hand-churned into makhan, then slow-cooked. Most commercial ghee is made from cream. The bilona method gives a grainy (danedar) texture and a deeper aroma.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "How can I tell if shilajit is pure?",
+            "answer": "<p>Pure resin softens in warm hands and hardens in the fridge, dissolves fully in warm water leaving no grit, and smells smoky and earthy. Every batch of ours is also lab tested — see the Lab Reports page.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store ghee and shilajit?",
+            "answer": "<p>Keep both in a cool, dry place with the lid closed and always use a dry spoon.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return or exchange an order?",
+            "answer": "<p>If your jar arrives damaged or isn't right, message us within 48 hours of delivery with a photo and we'll replace it. See our refund policy for details.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "faq"
+  ]
+}

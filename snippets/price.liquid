@@ -1,0 +1,26 @@
+{%- comment -%}
+  Price block. Params: product, variant (optional), show_from (bool)
+{%- endcomment -%}
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign compare = target.compare_at_price
+  assign on_sale = false
+  if compare > target.price
+    assign on_sale = true
+  endif
+-%}
+<div class="price{% if on_sale %} price--sale{% endif %}" data-price-wrapper>
+  {%- if show_from and product.price_varies -%}
+    <span class="price__from">From</span>
+    <span class="price__current" data-price>{{ product.price_min | money_without_trailing_zeros }}</span>
+  {%- else -%}
+    <span class="price__current" data-price>{{ target.price | money_without_trailing_zeros }}</span>
+    <s class="price__compare" data-compare-price{% unless on_sale %} hidden{% endunless %}>{{ compare | money_without_trailing_zeros }}</s>
+    {%- if on_sale -%}
+      {%- assign saving = compare | minus: target.price -%}
+      <span class="price__badge" data-sale-badge>Save {{ saving | money_without_trailing_zeros }}</span>
+    {%- else -%}
+      <span class="price__badge" data-sale-badge hidden></span>
+    {%- endif -%}
+  {%- endif -%}
+</div>

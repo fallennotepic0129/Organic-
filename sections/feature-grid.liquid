@@ -1,0 +1,54 @@
+<section class="features features--{{ section.settings.tone }} features--{{ section.settings.style }}" {% if section.settings.tone == 'dark' %}data-header-theme="dark"{% endif %}>
+  <div class="container">
+    <div class="features__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="h2" data-split>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<p class="features__lede" data-reveal>{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <ol class="features__grid">
+      {%- for block in section.blocks -%}
+        <li class="feature" data-reveal {{ block.shopify_attributes }}>
+          {%- if section.settings.style == 'numbered' -%}
+            <span class="feature__num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+          {%- else -%}
+            <span class="feature__icon" data-draw>{% render 'icon', name: block.settings.icon, size: 30 %}</span>
+          {%- endif -%}
+          <h3 class="feature__title">{{ block.settings.title }}</h3>
+          <div class="feature__text rte">{{ block.settings.text }}</div>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature grid",
+  "tag": "div",
+  "class": "section-features",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why it matters" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Goodness you can feel." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "select", "id": "style", "label": "Style", "default": "icons", "options": [ { "value": "icons", "label": "Icons" }, { "value": "numbered", "label": "Numbered steps" } ] },
+    { "type": "select", "id": "tone", "label": "Background", "default": "cream", "options": [ { "value": "cream", "label": "Cream" }, { "value": "paper", "label": "Paper" }, { "value": "dark", "label": "Dark" } ] }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "leaf", "options": [
+          { "value": "leaf", "label": "Leaf" }, { "value": "heart", "label": "Heart" }, { "value": "flame", "label": "Flame" },
+          { "value": "drop", "label": "Drop" }, { "value": "mountain", "label": "Mountain" }, { "value": "shield", "label": "Shield" },
+          { "value": "flask", "label": "Flask" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "award", "label": "Award" },
+          { "value": "clock", "label": "Clock" }, { "value": "truck", "label": "Truck" }, { "value": "cash", "label": "Cash" }
+        ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Feature" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Describe the benefit.</p>" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Feature grid", "blocks": [ { "type": "feature" }, { "type": "feature" }, { "type": "feature" } ] } ]
+}
+{% endschema %}

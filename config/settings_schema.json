@@ -1,0 +1,74 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Mian Dairies",
+    "theme_version": "1.0.0",
+    "theme_author": "Mian Dairies",
+    "theme_documentation_url": "https://github.com/fallennotepic0129/Organic-",
+    "theme_support_url": "https://github.com/fallennotepic0129/Organic-"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Mian Dairies" },
+      { "type": "text", "id": "brand_tagline", "label": "Tagline", "default": "Pure desi ghee & Himalayan shilajit" },
+      { "type": "image_picker", "id": "logo", "label": "Logo (optional — a wordmark is used when empty)" },
+      { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 240, "step": 4, "unit": "px", "default": 132 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_cream", "label": "Cream (page background)", "default": "#F4ECDD" },
+      { "type": "color", "id": "color_paper", "label": "Paper (cards)", "default": "#FBF7EE" },
+      { "type": "color", "id": "color_ink", "label": "Ink (text)", "default": "#17120D" },
+      { "type": "color", "id": "color_gold", "label": "Ghee gold", "default": "#D9A440" },
+      { "type": "color", "id": "color_gold_deep", "label": "Deep gold", "default": "#A8741F" },
+      { "type": "color", "id": "color_resin", "label": "Shilajit black", "default": "#0F0B08" },
+      { "type": "color", "id": "color_amber", "label": "Resin amber", "default": "#B9783A" },
+      { "type": "color", "id": "color_leaf", "label": "Leaf green", "default": "#4F5D33" }
+    ]
+  },
+  {
+    "name": "Motion",
+    "settings": [
+      { "type": "paragraph", "content": "Visitors who ask their device for reduced motion always get a calm, static version of every animation." },
+      { "type": "checkbox", "id": "enable_preloader", "label": "Show preloader on the homepage", "default": true },
+      { "type": "checkbox", "id": "enable_smooth_scroll", "label": "Smooth scrolling", "default": true },
+      { "type": "checkbox", "id": "enable_cursor", "label": "Custom cursor (desktop)", "default": true },
+      { "type": "checkbox", "id": "enable_grain", "label": "Film grain texture", "default": true }
+    ]
+  },
+  {
+    "name": "Contact & WhatsApp",
+    "settings": [
+      { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number", "info": "International format without + or spaces, e.g. 923001234567", "default": "923000000000" },
+      { "type": "text", "id": "whatsapp_message", "label": "Default WhatsApp message", "default": "Assalam o Alaikum! I'd like to know more about Mian Dairies products." },
+      { "type": "checkbox", "id": "show_whatsapp_float", "label": "Show floating WhatsApp button", "default": true },
+      { "type": "text", "id": "contact_phone", "label": "Phone", "default": "+92 300 0000000" },
+      { "type": "text", "id": "contact_email", "label": "Email", "default": "hello@miandairies.pk" },
+      { "type": "text", "id": "contact_address", "label": "Address", "default": "Lahore, Pakistan" },
+      { "type": "text", "id": "contact_hours", "label": "Support hours", "default": "Mon–Sat, 10am – 7pm" }
+    ]
+  },
+  {
+    "name": "Cart & delivery",
+    "settings": [
+      { "type": "number", "id": "free_shipping_threshold", "label": "Free delivery threshold (PKR)", "info": "Set to 0 to hide the progress bar. Make sure your Shopify shipping rates match.", "default": 5000 },
+      { "type": "text", "id": "cod_note", "label": "Cash on delivery note", "default": "Cash on Delivery available across Pakistan" },
+      { "type": "range", "id": "delivery_min_days", "label": "Delivery estimate — minimum days", "min": 1, "max": 10, "step": 1, "default": 2 },
+      { "type": "range", "id": "delivery_max_days", "label": "Delivery estimate — maximum days", "min": 1, "max": 14, "step": 1, "default": 5 },
+      { "type": "product", "id": "upsell_product", "label": "Cart upsell product", "info": "Shown in the cart drawer when it isn't already in the cart." }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" }
+    ]
+  }
+]

@@ -1,0 +1,78 @@
+<section class="bilona" data-scene="bilona">
+  <div class="bilona__head container">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2 class="h2" data-split>{{ section.settings.heading }}</h2>
+    <p class="bilona__lede" data-reveal>{{ section.settings.text }}</p>
+  </div>
+
+  <div class="bilona__pin" data-bilona-pin>
+    <div class="bilona__progress" aria-hidden="true">
+      <span class="bilona__bar" data-bilona-bar></span>
+      <ol class="bilona__dots">
+        {%- for block in section.blocks -%}<li data-bilona-dot><span>{{ block.settings.title }}</span></li>{%- endfor -%}
+      </ol>
+    </div>
+    <ol class="bilona__track" data-bilona-track>
+      {%- for block in section.blocks -%}
+        {%- assign art_uid = 'bl-' | append: section.id | append: forloop.index -%}
+        <li class="step" data-step {{ block.shopify_attributes }}>
+          <div class="step__art" data-step-art>
+            <div class="step__halo" aria-hidden="true"></div>
+            {% render 'bilona-art', art: block.settings.art, uid: art_uid %}
+          </div>
+          <div class="step__text">
+            <span class="step__num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+            <h3 class="step__title">{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+            {%- if block.settings.meta != blank -%}<span class="step__meta">{% render 'icon', name: 'clock', size: 14 %} {{ block.settings.meta }}</span>{%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bilona process",
+  "tag": "div",
+  "class": "section-bilona",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The bilona method" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Thirty litres of milk. One jar of ghee. No shortcuts." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "The way our grandmothers made it — curd churned by hand, butter slow-cooked over a wood fire. It takes longer. You can taste why." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "select", "id": "art", "label": "Illustration", "default": "cow", "options": [
+          { "value": "cow", "label": "Cow" },
+          { "value": "curd", "label": "Curd pot (overnight)" },
+          { "value": "churn", "label": "Hand churning" },
+          { "value": "butter", "label": "Makhan (butter)" },
+          { "value": "fire", "label": "Wood-fire cooking" },
+          { "value": "jar", "label": "Jar" }
+        ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Step" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "meta", "label": "Time / detail" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bilona process",
+      "blocks": [
+        { "type": "step", "settings": { "art": "cow", "title": "Grass-fed milk", "text": "Fresh whole milk from free-grazing cows, milked at dawn.", "meta": "5:00 am" } },
+        { "type": "step", "settings": { "art": "curd", "title": "Set overnight", "text": "Boiled, cooled and set into curd in clay matkas.", "meta": "12 hours" } },
+        { "type": "step", "settings": { "art": "churn", "title": "Hand-churned", "text": "The curd is churned with a wooden madhani until makhan rises.", "meta": "Both directions, by hand" } },
+        { "type": "step", "settings": { "art": "butter", "title": "Makhan", "text": "White butter is lifted, washed and gathered — nothing else goes in.", "meta": "Pure makhan only" } },
+        { "type": "step", "settings": { "art": "fire", "title": "Slow-cooked", "text": "Simmered over a low wood fire until golden and danedar.", "meta": "3–4 hours" } },
+        { "type": "step", "settings": { "art": "jar", "title": "Jarred warm", "text": "Filtered, jarred warm and sealed. Batch number on every lid.", "meta": "Same day" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

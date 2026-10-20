@@ -1,0 +1,116 @@
+{%- liquid
+  assign threshold = settings.free_shipping_threshold | default: 0 | times: 100
+  assign upsell = settings.upsell_product
+  assign show_upsell = false
+  if upsell != blank and upsell.available
+    assign show_upsell = true
+    for item in cart.items
+      if item.product_id == upsell.id
+        assign show_upsell = false
+      endif
+    endfor
+  endif
+-%}
+<div class="drawer" data-cart-drawer aria-hidden="true">
+  <div class="drawer__overlay" data-cart-close></div>
+  <aside class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle" tabindex="-1">
+    <div class="drawer__inner" data-cart-drawer-inner data-item-count="{{ cart.item_count }}">
+      <div class="drawer__head">
+        <h2 id="CartDrawerTitle" class="drawer__title">{{ 'cart.title' | t }} <sup>{{ cart.item_count }}</sup></h2>
+        <button class="icon-btn" type="button" data-cart-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close', size: 22 %}</button>
+      </div>
+
+      {%- if threshold > 0 and cart.item_count > 0 -%}
+        {%- liquid
+          assign remaining = threshold | minus: cart.total_price
+          assign pct = cart.total_price | times: 100 | divided_by: threshold
+          if pct > 100
+            assign pct = 100
+          endif
+        -%}
+        <div class="ship-bar">
+          <p class="ship-bar__text">
+            {%- if remaining > 0 -%}
+              {%- assign remaining_money = remaining | money_without_trailing_zeros -%}
+              {{ 'cart.free_shipping_remaining' | t: amount: remaining_money }}
+            {%- else -%}
+              {% render 'icon', name: 'sparkle', size: 16 %} {{ 'cart.free_shipping_unlocked' | t }}
+            {%- endif -%}
+          </p>
+          <div class="ship-bar__track"><span class="ship-bar__fill" style="--pct: {{ pct }}%"></span></div>
+        </div>
+      {%- endif -%}
+
+      <div class="drawer__body" data-lenis-prevent>
+        {%- if cart.item_count == 0 -%}
+          <div class="drawer__empty">
+            <div class="drawer__empty-jar">{% render 'jar-ghee', uid: 'cartempty', level: 0.08, label: false %}</div>
+            <p>{{ 'cart.empty' | t }}</p>
+            <a class="btn btn--ink" href="{{ routes.all_products_collection_url }}" data-cart-close>{{ 'cart.continue' | t }}</a>
+          </div>
+        {%- else -%}
+          <ul class="line-items">
+            {%- for item in cart.items -%}
+              <li class="line-item" data-line-key="{{ item.key }}">
+                <a class="line-item__media" href="{{ item.url }}">
+                  {%- if item.image -%}
+                    {{ item.image | image_url: width: 200 | image_tag: alt: item.title, loading: 'lazy' }}
+                  {%- else -%}
+                    {%- assign li_uid = 'li-' | append: forloop.index -%}
+                    {% render 'product-visual', product: item.product, uid: li_uid, label: false %}
+                  {%- endif -%}
+                </a>
+                <div class="line-item__info">
+                  <a class="line-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}<p class="line-item__variant">{{ item.variant.title }}</p>{%- endunless -%}
+                  <div class="line-item__row">
+                    <div class="qty qty--sm">
+                      <button type="button" aria-label="Decrease quantity" data-line-change="{{ item.quantity | minus: 1 }}">{% render 'icon', name: 'minus', size: 14 %}</button>
+                      <span>{{ item.quantity }}</span>
+                      <button type="button" aria-label="Increase quantity" data-line-change="{{ item.quantity | plus: 1 }}">{% render 'icon', name: 'plus', size: 14 %}</button>
+                    </div>
+                    <span class="line-item__price">{{ item.final_line_price | money_without_trailing_zeros }}</span>
+                  </div>
+                  <button class="line-item__remove" type="button" data-line-change="0">{{ 'cart.remove' | t }}</button>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          {%- if show_upsell -%}
+            <div class="upsell">
+              <p class="eyebrow">{{ 'cart.upsell' | t }}</p>
+              {%- form 'product', upsell, class: 'upsell__card', data-product-form: '' -%}
+                <div class="upsell__media">{% render 'product-visual', product: upsell, uid: 'upsell', label: false %}</div>
+                <div class="upsell__info">
+                  <p class="upsell__title">{{ upsell.title }}</p>
+                  <p class="upsell__price">{{ upsell.selected_or_first_available_variant.price | money_without_trailing_zeros }}{% unless upsell.has_only_default_variant %} · {{ upsell.selected_or_first_available_variant.title }}{% endunless %}</p>
+                </div>
+                <input type="hidden" name="id" value="{{ upsell.selected_or_first_available_variant.id }}">
+                <button class="icon-btn icon-btn--solid" type="submit" aria-label="Add {{ upsell.title | escape }}">{% render 'icon', name: 'plus', size: 18 %}</button>
+              {%- endform -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      {%- if cart.item_count > 0 -%}
+        <div class="drawer__foot">
+          <div class="drawer__subtotal"><span>{{ 'cart.subtotal' | t }}</span><strong>{{ cart.total_price | money_without_trailing_zeros }}</strong></div>
+          <p class="drawer__note">{% render 'icon', name: 'cash', size: 16 %} {{ settings.cod_note }} · {{ 'cart.taxes_note' | t }}</p>
+          <form action="{{ routes.cart_url }}" method="post">
+            <button type="submit" name="checkout" class="btn btn--ink btn--block" data-magnetic><span class="btn__label">{{ 'cart.checkout' | t }}</span>{% render 'icon', name: 'arrow-right', size: 16 %}</button>
+          </form>
+          <a class="drawer__viewcart link-underline" href="{{ routes.cart_url }}">View cart</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </aside>
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": []
+}
+{% endschema %}

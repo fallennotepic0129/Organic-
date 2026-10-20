@@ -1,0 +1,294 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "visual": "auto"
+      },
+      "blocks": {
+        "title_1": {
+          "type": "title",
+          "settings": {
+            "eyebrow": "Bilona desi ghee"
+          }
+        },
+        "rating_2": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price_3": {
+          "type": "price",
+          "settings": {}
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Hand-churned from curd, slow-cooked over a wood fire. Grainy, golden and fragrant — the way ghee is supposed to taste.</p>"
+          }
+        },
+        "variant_picker_5": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "buy_buttons_6": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_whatsapp": true
+          }
+        },
+        "delivery_7": {
+          "type": "delivery",
+          "settings": {}
+        },
+        "trust_8": {
+          "type": "trust",
+          "settings": {}
+        },
+        "lab_report_9": {
+          "type": "lab_report",
+          "settings": {
+            "title": "View the lab report",
+            "text": "Independent test results for this product"
+          }
+        },
+        "collapsible_10": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Description",
+            "icon": "leaf",
+            "source": "description",
+            "open": true
+          }
+        },
+        "collapsible_11": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "How to use",
+            "icon": "flame",
+            "source": "custom",
+            "content": "<p>Cook, temper (tarka), spread on paratha or add a spoon to warm milk or dal. High smoke point — great for frying and roasting.</p>"
+          }
+        },
+        "collapsible_12": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Ingredients & sourcing",
+            "icon": "drop",
+            "source": "custom",
+            "content": "<p>Ingredients: 100% cow's milk ghee. Nothing else. Made in small batches from our own farm's milk.</p>"
+          }
+        },
+        "collapsible_13": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Delivery & returns",
+            "icon": "truck",
+            "source": "custom",
+            "content": "<p>Delivered across Pakistan in 2–5 working days. Cash on delivery available. Damaged on arrival? Send us a photo within 48 hours and we'll replace it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "title_1",
+        "rating_2",
+        "price_3",
+        "text_4",
+        "variant_picker_5",
+        "buy_buttons_6",
+        "delivery_7",
+        "trust_8",
+        "lab_report_9",
+        "collapsible_10",
+        "collapsible_11",
+        "collapsible_12",
+        "collapsible_13"
+      ]
+    },
+    "benefits": {
+      "type": "feature-grid",
+      "settings": {
+        "eyebrow": "Why bilona ghee",
+        "heading": "A spoon of tradition, every day.",
+        "style": "icons",
+        "tone": "paper"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "flame",
+            "title": "High smoke point",
+            "text": "<p>Stable for tarka, frying and roasting without burning.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "title": "Traditional goodness",
+            "text": "<p>Made the way families have made ghee for generations.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Danedar texture",
+            "text": "<p>The grainy texture that only slow cooking gives.</p>"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Nothing added",
+            "text": "<p>No colour, no vegetable oil, no preservatives.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ]
+    },
+    "bilona": {
+      "type": "bilona-process",
+      "settings": {},
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "art": "cow",
+            "title": "Grass-fed milk",
+            "text": "Fresh whole milk from free-grazing cows, milked at dawn.",
+            "meta": "5:00 am"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "art": "curd",
+            "title": "Set overnight",
+            "text": "Boiled, cooled and set into curd in clay matkas.",
+            "meta": "12 hours"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "art": "churn",
+            "title": "Hand-churned",
+            "text": "The curd is churned with a wooden madhani until makhan rises.",
+            "meta": "Both directions, by hand"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "art": "butter",
+            "title": "Makhan",
+            "text": "White butter is lifted, washed and gathered — nothing else goes in.",
+            "meta": "Pure makhan only"
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "art": "fire",
+            "title": "Slow-cooked",
+            "text": "Simmered over a low wood fire until golden and danedar.",
+            "meta": "3–4 hours"
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "art": "jar",
+            "title": "Jarred warm",
+            "text": "Filtered, jarred warm and sealed. Batch number on every lid.",
+            "meta": "Same day"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6"
+      ]
+    },
+    "reviews": {
+      "type": "product-reviews",
+      "settings": {},
+      "blocks": {},
+      "block_order": []
+    },
+    "bundle": {
+      "type": "bundle-offer",
+      "settings": {
+        "product": "ghee-shilajit-bundle"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {},
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer cash on delivery?",
+            "answer": "<p>Yes. Cash on Delivery is available across Pakistan. You can also pay by bank transfer, JazzCash or Easypaisa.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Most orders arrive in 2–5 working days. Major cities are usually faster. You'll get a tracking number by SMS/WhatsApp once your parcel ships.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What makes bilona ghee different?",
+            "answer": "<p>Bilona ghee is made from curd that is hand-churned into makhan, then slow-cooked. Most commercial ghee is made from cream. The bilona method gives a grainy (danedar) texture and a deeper aroma.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store ghee and shilajit?",
+            "answer": "<p>Keep both in a cool, dry place with the lid closed and always use a dry spoon.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return or exchange an order?",
+            "answer": "<p>If your jar arrives damaged or isn't right, message us within 48 hours of delivery with a photo and we'll replace it. See our refund policy for details.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "benefits",
+    "bilona",
+    "reviews",
+    "bundle",
+    "faq"
+  ]
+}

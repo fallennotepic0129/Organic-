@@ -1,0 +1,25 @@
+{%- comment -%}
+  Renders the code-drawn jar that matches a product (shilajit or ghee).
+  Detection: handle, product type or tags containing "shilajit".
+  Params: product, uid, level, force ('ghee' | 'shilajit'), label
+{%- endcomment -%}
+{%- liquid
+  assign visual = force | default: 'auto'
+  if visual == 'auto'
+    assign visual = 'ghee'
+    assign hay = product.handle | append: ' ' | append: product.type | append: ' ' | append: product.title | downcase
+    assign tag_hay = product.tags | join: ' ' | downcase
+    if hay contains 'shilajit' or tag_hay contains 'shilajit'
+      assign visual = 'shilajit'
+    endif
+  endif
+  assign jar_title = nil
+  if product != blank
+    assign jar_title = product.metafields.custom.jar_label
+  endif
+-%}
+{%- if visual == 'shilajit' -%}
+  {% render 'jar-shilajit', uid: uid, level: level, label: label, title: jar_title %}
+{%- else -%}
+  {% render 'jar-ghee', uid: uid, level: level, label: label, title: jar_title %}
+{%- endif -%}

@@ -1,0 +1,27 @@
+<section class="account">
+  <div class="container container--narrow">
+    <div class="card account__card">
+      <div data-login-panel>
+        <h1 class="h2">Log in</h1>
+        {%- form 'customer_login', class: 'form' -%}
+          {{ form.errors | default_errors }}
+          <label class="field"><span>Email</span><input type="email" name="customer[email]" autocomplete="email" required></label>
+          {%- if form.password_needed -%}
+            <label class="field"><span>Password</span><input type="password" name="customer[password]" autocomplete="current-password" required></label>
+          {%- endif -%}
+          <button type="submit" class="btn btn--ink btn--block"><span class="btn__label">Sign in</span></button>
+        {%- endform -%}
+        <p class="account__links"><a class="link-underline" href="#recover" data-toggle-recover>Forgot your password?</a> · <a class="link-underline" href="{{ routes.account_register_url }}">Create account</a></p>
+      </div>
+      <div id="recover" data-recover-panel hidden>
+        <h2 class="h2">Reset your password</h2>
+        {%- form 'recover_customer_password', class: 'form' -%}
+          {{ form.errors | default_errors }}
+          {%- if form.posted_successfully? -%}<p class="form-success">We've emailed you a link to reset your password.</p>{%- endif -%}
+          <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+          <button type="submit" class="btn btn--ink btn--block"><span class="btn__label">Send reset link</span></button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>

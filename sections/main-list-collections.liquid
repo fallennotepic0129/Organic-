@@ -1,0 +1,20 @@
+<section class="collection">
+  <div class="container">
+    <h1 class="h2" data-split>Collections</h1>
+    <div class="blog__grid">
+      {%- for collection in collections -%}
+        <a class="blog-card" href="{{ collection.url }}" data-reveal>
+          <div class="blog-card__media">
+            {%- if collection.featured_image -%}{{ collection.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: collection.title }}{%- else -%}<span class="blog-card__ph" aria-hidden="true">{% render 'icon', name: 'drop', size: 40 %}</span>{%- endif -%}
+          </div>
+          <h2 class="blog-card__title">{{ collection.title }}</h2>
+          <p class="blog-card__date">{{ collection.products_count }} products</p>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Collections list", "tag": "div", "class": "section-list-collections", "settings": [] }
+{% endschema %}

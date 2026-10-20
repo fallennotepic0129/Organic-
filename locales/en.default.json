@@ -1,0 +1,49 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "menu": "Menu",
+    "close": "Close",
+    "search": "Search",
+    "account": "Account",
+    "cart": "Cart",
+    "home": "Home"
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out",
+    "unavailable": "Unavailable",
+    "adding": "Adding…",
+    "added": "Added",
+    "quantity": "Quantity",
+    "size": "Size",
+    "order_on_whatsapp": "Order on WhatsApp",
+    "view_details": "View details",
+    "from": "From {{ price }}",
+    "save": "Save {{ amount }}"
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty",
+    "continue": "Continue shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "taxes_note": "Delivery calculated at checkout.",
+    "free_shipping_unlocked": "You've unlocked free delivery!",
+    "free_shipping_remaining": "Add {{ amount }} more for free delivery",
+    "upsell": "Complete the ritual"
+  },
+  "newsletter": {
+    "email": "Email address",
+    "subscribe": "Subscribe",
+    "success": "Thank you! You're on the list."
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send message",
+    "success": "Thanks — we'll get back to you within one working day."
+  }
+}

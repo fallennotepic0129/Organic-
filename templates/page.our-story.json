@@ -1,0 +1,150 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "Made slowly, on purpose.",
+        "text": "Mian Dairies began with one family recipe and one stubborn idea: if we wouldn't feed it to our own children, we won't sell it.",
+        "art": "both"
+      }
+    },
+    "story": {
+      "type": "story",
+      "settings": {
+        "art": "churn",
+        "eyebrow": "Where it began",
+        "heading": "It started in our grandmother's kitchen.",
+        "text": "<p>Every morning the madhani turned in the clay matka, and every week there was fresh ghee on the table. We still make it exactly that way — just a few more jars at a time.</p><p>Replace this text with the real Mian Dairies story: who you are, where your farm is, and why you started.</p>"
+      }
+    },
+    "bilona": {
+      "type": "bilona-process",
+      "settings": {},
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "art": "cow",
+            "title": "Grass-fed milk",
+            "text": "Fresh whole milk from free-grazing cows, milked at dawn.",
+            "meta": "5:00 am"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "art": "curd",
+            "title": "Set overnight",
+            "text": "Boiled, cooled and set into curd in clay matkas.",
+            "meta": "12 hours"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "art": "churn",
+            "title": "Hand-churned",
+            "text": "The curd is churned with a wooden madhani until makhan rises.",
+            "meta": "Both directions, by hand"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "art": "butter",
+            "title": "Makhan",
+            "text": "White butter is lifted, washed and gathered — nothing else goes in.",
+            "meta": "Pure makhan only"
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "art": "fire",
+            "title": "Slow-cooked",
+            "text": "Simmered over a low wood fire until golden and danedar.",
+            "meta": "3–4 hours"
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "art": "jar",
+            "title": "Jarred warm",
+            "text": "Filtered, jarred warm and sealed. Batch number on every lid.",
+            "meta": "Same day"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6"
+      ]
+    },
+    "values": {
+      "type": "feature-grid",
+      "settings": {
+        "eyebrow": "What we promise",
+        "heading": "Three promises on every lid.",
+        "style": "icons",
+        "tone": "paper"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Nothing added",
+            "text": "<p>No colours, oils, fillers or preservatives. Ever.</p>"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "flask",
+            "title": "Tested, every batch",
+            "text": "<p>Independent lab reports, published for everyone to see.</p>"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "title": "Made by hand",
+            "text": "<p>Small batches, made by people — not by a factory line.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "peaks_story": {
+      "type": "story",
+      "settings": {
+        "art": "shilajit",
+        "eyebrow": "The mountains",
+        "heading": "And then we went north.",
+        "text": "<p>Our shilajit comes from trusted harvesters in Gilgit-Baltistan who gather it by hand from high cliffs, then purify it slowly with spring water and sunlight.</p>",
+        "reverse": true,
+        "tone": "dark",
+        "button_label": "Shop shilajit",
+        "button_link": "/products/shilajit"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "story",
+    "bilona",
+    "values",
+    "peaks_story"
+  ]
+}

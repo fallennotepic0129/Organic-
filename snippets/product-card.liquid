@@ -1,0 +1,46 @@
+{%- comment -%}
+  Floating "buy" card used at the end of the hero and shilajit scenes.
+  Params: product, tone ('light' | 'dark'), eyebrow, blurb, uid
+{%- endcomment -%}
+{%- assign tone = tone | default: 'light' -%}
+<div class="pcard pcard--{{ tone }}" data-pcard>
+  {%- if eyebrow != blank -%}<p class="eyebrow pcard__eyebrow">{{ eyebrow }}</p>{%- endif -%}
+  {%- if product != blank -%}
+    <h3 class="pcard__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    {%- assign rating = product.metafields.reviews.rating.value -%}
+    {%- if rating != blank -%}
+      <div class="pcard__rating">{% render 'stars', rating: rating.rating, count: product.metafields.reviews.rating_count %}</div>
+    {%- endif -%}
+    {%- if blurb != blank -%}<p class="pcard__blurb">{{ blurb }}</p>{%- endif -%}
+
+    {%- form 'product', product, class: 'pcard__form', data-product-form: '' -%}
+      {%- if product.has_only_default_variant -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      {%- else -%}
+        <div class="chips" role="radiogroup" aria-label="{{ product.options.first | escape }}">
+          {%- for variant in product.variants -%}
+            <label class="chip">
+              <input type="radio" name="id" value="{{ variant.id }}" data-chip-price="{{ variant.price | money_without_trailing_zeros | escape }}"
+                {% if variant.id == product.selected_or_first_available_variant.id %}checked{% endif %}
+                {% unless variant.available %}disabled{% endunless %}>
+              <span>{{ variant.title }}</span>
+            </label>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <input type="hidden" name="quantity" value="1">
+      <div class="pcard__foot">
+        <span class="pcard__price" data-chip-target>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</span>
+        <button type="submit" class="btn btn--{% if tone == 'dark' %}gold{% else %}ink{% endif %}" data-magnetic {% unless product.available %}disabled{% endunless %}>
+          <span class="btn__label">{% if product.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</span>
+          {% render 'icon', name: 'plus', size: 16 %}
+        </button>
+      </div>
+    {%- endform -%}
+    <a class="pcard__link link-underline" href="{{ product.url }}">{{ 'products.view_details' | t }} {% render 'icon', name: 'arrow-right', size: 14 %}</a>
+  {%- else -%}
+    <h3 class="pcard__title">Choose a product</h3>
+    <p class="pcard__blurb">Pick a product for this section in the theme editor to show its price and an add-to-cart button here.</p>
+    <a class="btn btn--ink" href="{{ routes.all_products_collection_url }}">Shop all</a>
+  {%- endif -%}
+</div>
