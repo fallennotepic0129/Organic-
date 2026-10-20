@@ -1,8 +1,8 @@
 {
-  "name": "mian-dairies-theme-dev",
+  "name": "karakoram-naturals-theme-dev",
   "private": true,
   "type": "module",
-  "description": "Local tooling for the Mian Dairies Shopify theme (preview renderer + theme check). Not uploaded to Shopify.",
+  "description": "Local tooling for the Karakoram Naturals Shopify theme (preview renderer + theme check). Not uploaded to Shopify.",
   "scripts": {
     "preview": "node preview/build.mjs",
     "serve": "node preview/serve.mjs",

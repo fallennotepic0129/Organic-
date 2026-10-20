@@ -53,7 +53,7 @@
         motion: {
           smooth: {{ settings.enable_smooth_scroll | json }},
           cursor: {{ settings.enable_cursor | json }},
-          preloader: {{ settings.enable_preloader | json }}
+          preloader: true
         },
         strings: {
           addToCart: {{ 'products.add_to_cart' | t | json }},
@@ -77,7 +77,7 @@
   <body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}--{{ template.suffix }}{% endif %}">
     <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
 
-    {%- if settings.enable_preloader and template.name == 'index' -%}
+    {%- if template.name == 'index' -%}
       {% render 'preloader' %}
     {%- endif -%}
 

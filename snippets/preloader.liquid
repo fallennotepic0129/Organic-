@@ -1,16 +1,9 @@
 <div class="preloader" data-preloader aria-hidden="true">
   <div class="preloader__inner">
-    <svg class="preloader__jar" viewBox="0 0 80 100">
-      <defs>
-        <clipPath id="preloader-clip"><path d="M22 14 L22 20 C22 24 12 26 12 32 L12 86 C12 92 16 96 22 96 L58 96 C64 96 68 92 68 86 L68 32 C68 26 58 24 58 20 L58 14 Z"/></clipPath>
-      </defs>
-      <g clip-path="url(#preloader-clip)">
-        <rect class="preloader__fill" x="0" y="0" width="80" height="100" fill="#D9A440" transform="translate(0 100)"/>
-      </g>
-      <path d="M22 14 L22 20 C22 24 12 26 12 32 L12 86 C12 92 16 96 22 96 L58 96 C64 96 68 92 68 86 L68 32 C68 26 58 24 58 20 L58 14 Z" fill="none" stroke="currentColor" stroke-width="2"/>
-      <rect x="18" y="4" width="44" height="10" rx="3" fill="currentColor"/>
-    </svg>
-    <p class="preloader__brand">{{ settings.brand_name | default: shop.name }}</p>
-    <p class="preloader__count"><span data-preloader-count>0</span>%</p>
+    <div class="preloader__jar">
+      {% render 'jar-ghee', uid: 'preloader', level: 0, stream: true, label: false %}
+    </div>
+    <p class="preloader__count"><span data-preloader-count>0</span><span class="preloader__pct">%</span></p>
   </div>
+  <p class="preloader__brand">{{ settings.brand_name | default: shop.name }}</p>
 </div>

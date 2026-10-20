@@ -1,4 +1,4 @@
-/* Mian Dairies — motion layer (GSAP + ScrollTrigger + SplitText + Lenis).
+/* Karakoram Naturals — motion layer (GSAP + ScrollTrigger + SplitText + Lenis).
    Every scene is progressive: markup renders a complete, static layout and
    this file only adds animation on top. Reduced-motion visitors keep the static version. */
 (() => {
@@ -10,17 +10,54 @@
 
   const removePreloader = () => document.querySelectorAll('[data-preloader]').forEach((el) => el.remove());
   // Safety net: never leave the preloader up.
-  setTimeout(removePreloader, 7000);
+  setTimeout(removePreloader, 9000);
+
+  // Homepage loader: ghee pours into a jar while the counter runs to 100%, then the curtain lifts.
+  // Plays on every homepage visit (the theme editor skips it).
+  function runPreloader(gsap) {
+    const el = document.querySelector('[data-preloader]');
+    if (!el) return Promise.resolve();
+    if (designMode) { el.remove(); return Promise.resolve(); }
+    html.style.overflow = 'hidden';
+    MD.lenis?.stop();
+    return new Promise((resolve) => {
+      const one = (sel) => el.querySelector(sel);
+      const count = one('[data-preloader-count]');
+      const o = { v: 0 };
+      const done = () => { el.remove(); html.style.overflow = ''; MD.lenis?.start(); };
+      gsap.to(one('.jar__wave'), { x: -60, duration: 1.6, ease: 'none', repeat: -1 });
+      el.querySelectorAll('.jar__ripple').forEach((r, i) => gsap.fromTo(r, { scale: 0.3, opacity: 0.9, transformOrigin: '50% 50%' }, { scale: 2.8, opacity: 0, duration: 1.2, repeat: -1, delay: i * 0.6 }));
+      gsap.set(one('.jar__stream'), { scaleY: 0, opacity: 1, transformOrigin: '50% 0%' });
+      gsap.set(one('.jar__stream-inner'), { scaleY: 1, transformOrigin: '50% 100%' });
+      gsap.timeline({ onComplete: done })
+        .from(one('.preloader__jar'), { y: 40, autoAlpha: 0, duration: 0.7, ease: 'expo.out' }, 0)
+        .from(one('.preloader__brand'), { autoAlpha: 0, letterSpacing: '0.8em', duration: 1.4, ease: 'expo.out' }, 0.1)
+        .to(one('.jar__lid'), { y: -90, x: 60, rotation: 24, autoAlpha: 0, duration: 0.5, ease: 'power2.in' }, 0.3)
+        .to(one('.jar__stream'), { scaleY: 1, duration: 0.35, ease: 'power1.in' }, 0.55)
+        .to(one('.jar__ripples'), { opacity: 1, duration: 0.2 }, 0.85)
+        .fromTo(one('.jar__fill'), { y: 290 }, { y: 0, duration: 1.9, ease: 'power1.inOut' }, 0.85)
+        .to(o, { v: 100, duration: 1.9, ease: 'power1.inOut', onUpdate: () => { count.textContent = Math.round(o.v); } }, 0.85)
+        .to(one('.jar__stream-inner'), { scaleY: 0, duration: 0.35, ease: 'power1.in' }, 2.6)
+        .to(one('.jar__ripples'), { opacity: 0, duration: 0.3 }, 2.8)
+        .to(one('.jar__lid'), { y: 0, x: 0, rotation: 0, autoAlpha: 1, duration: 0.5, ease: 'back.out(1.6)' }, 2.85)
+        .to(one('.preloader__inner'), { y: -30, autoAlpha: 0, duration: 0.5, ease: 'power2.in' }, 3.5)
+        .to(one('.preloader__brand'), { autoAlpha: 0, duration: 0.4 }, 3.5)
+        .to(el, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1, ease: 'expo.inOut' }, 3.75)
+        .add(resolve, 4.0);
+    });
+  }
 
   const ready = (fn) => (document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn) : fn());
 
   ready(() => {
     const { gsap, ScrollTrigger, SplitText, Lenis } = window;
-    if (!gsap || !ScrollTrigger || reduce) {
-      if (reduce) html.classList.add('reduced-motion');
-      removePreloader();
+    if (!gsap || !ScrollTrigger) { removePreloader(); return; }
+    if (reduce) {
+      html.classList.add('reduced-motion');
+      runPreloader(gsap);
       return;
     }
+    const preloading = runPreloader(gsap);
     gsap.registerPlugin(ScrollTrigger);
     if (SplitText) gsap.registerPlugin(SplitText);
 
@@ -416,7 +453,7 @@
         });
 
         // 5 — reveal the product
-        tl.to(jar, { xPercent: isMobile ? 0 : -45, yPercent: isMobile ? -150 : -12, scale: isMobile ? 0.72 : 1.18, duration: 1, ease: 'power2.inOut' }, 6.9)
+        tl.to(jar, { xPercent: isMobile ? 0 : -18, yPercent: isMobile ? -150 : -10, scale: isMobile ? 0.72 : 1.1, duration: 1, ease: 'power2.inOut' }, 6.9)
           .to(rock, { autoAlpha: 0.5, duration: 1 }, 6.9)
           .to(halo, { opacity: 0.45, duration: 1 }, 6.9)
           .to(card, { autoAlpha: 1, x: 0, y: 0, duration: 0.8, ease: 'power3.out' }, 7.3);
@@ -579,34 +616,6 @@
     }
 
     /* ======================================================================
-       Preloader
-       ====================================================================== */
-    function preloader() {
-      const el = document.querySelector('[data-preloader]');
-      if (!el) return Promise.resolve();
-      let seen = false;
-      try { seen = sessionStorage.getItem('md-intro') === '1'; sessionStorage.setItem('md-intro', '1'); } catch (e) { /* storage unavailable */ }
-      if (seen || designMode) { el.remove(); return Promise.resolve(); }
-      MD.lenis?.stop();
-      return new Promise((resolve) => {
-        const count = one('[data-preloader-count]', el);
-        const fill = one('.preloader__fill', el);
-        const brand = one('.preloader__brand', el);
-        const o = { v: 0 };
-        const tl = gsap.timeline({ onComplete: () => { el.remove(); MD.lenis?.start(); } });
-        if (SplitText) {
-          const split = SplitText.create(brand, { type: 'chars', mask: 'chars' });
-          tl.from(split.chars, { yPercent: 110, stagger: 0.035, duration: 0.9, ease: 'expo.out' }, 0);
-        }
-        tl.to(o, { v: 100, duration: 1.7, ease: 'power2.inOut', onUpdate: () => { count.textContent = Math.round(o.v); } }, 0)
-          .fromTo(fill, { y: 100 }, { y: 0, duration: 1.7, ease: 'power2.inOut' }, 0)
-          .to(one('.preloader__inner', el), { y: -40, autoAlpha: 0, duration: 0.6, ease: 'power2.in' }, '+=0.1')
-          .to(el, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.1, ease: 'expo.inOut' }, '-=0.2')
-          .add(resolve, '-=0.75');
-      });
-    }
-
-    /* ======================================================================
        Boot
        ====================================================================== */
     function initRoot(root) {
@@ -631,7 +640,7 @@
     const boot = () => {
       cursor();
       initRoot(document.body);
-      preloader().then(() => {
+      preloading.then(() => {
         heroIntro();
         ScrollTrigger.refresh();
       });

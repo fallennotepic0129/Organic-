@@ -1,4 +1,4 @@
-/* Mian Dairies — core storefront behaviour (works without the motion layer). */
+/* Karakoram Naturals — core storefront behaviour (works without the motion layer). */
 (() => {
   const MD = (window.MD = window.MD || {});
   MD.routes = MD.routes || { root: '/', cart: '/cart', cartAdd: '/cart/add', cartChange: '/cart/change' };

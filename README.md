@@ -1,6 +1,6 @@
-# Mian Dairies — Shopify theme
+# Karakoram Naturals — Shopify theme
 
-A custom Shopify Online Store 2.0 theme for **Mian Dairies**, built for two hero products: **bilona desi ghee** and **Himalayan shilajit**. The animation work follows the techniques used by Awwwards-winning sites: GSAP ScrollTrigger scenes, SplitText reveals, Lenis smooth scrolling, magnetic buttons and a custom cursor.
+A custom Shopify Online Store 2.0 theme for **Karakoram Naturals**, built for two hero products: **bilona desi ghee** and **Himalayan shilajit**. The animation work follows the techniques used by Awwwards-winning sites: GSAP ScrollTrigger scenes, SplitText reveals, Lenis smooth scrolling, magnetic buttons and a custom cursor.
 
 ## The signature scenes
 
@@ -37,7 +37,7 @@ Use these handles so the homepage connects to them automatically. You can also p
 | --- | --- | --- | --- |
 | Bilona Desi Ghee | `desi-ghee` | Size: 500 g / 1 kg / 2 kg | `product` (default) |
 | Himalayan Shilajit | `shilajit` | Size: 10 g / 20 g / 30 g | **`product.shilajit`** |
-| The Mian Ritual Bundle | `ghee-shilajit-bundle` | none | `product` |
+| The Karakoram Ritual Bundle | `ghee-shilajit-bundle` | none | `product` |
 
 To get the dark page, assign the **shilajit** template on the product's admin page under **Theme template**. A product whose handle, type, title or tags mention "shilajit" automatically gets the dark jar illustration.
 

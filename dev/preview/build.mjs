@@ -1,4 +1,4 @@
-// Static preview renderer for the Mian Dairies theme.
+// Static preview renderer for the Karakoram Naturals theme.
 // Renders the real Liquid templates with mock store data so the design can be
 // reviewed (and screenshotted) without a Shopify store. Not used by Shopify.
 //
@@ -206,8 +206,8 @@ const themeSettings = {
 };
 
 const shop = {
-  name: 'Mian Dairies',
-  url: 'https://miandairies.pk',
+  name: 'Karakoram Naturals',
+  url: 'https://karakoramnaturals.pk',
   description: 'Pure bilona desi ghee and Himalayan shilajit.',
   money_format: 'Rs.{{amount}}',
   customer_accounts_enabled: true,
@@ -227,7 +227,7 @@ const routes = {
 
 /* ---------- pages ---------- */
 const pages = [
-  { out: 'index.html', template: 'index', name: 'index', title: 'Mian Dairies — Pure desi ghee & Himalayan shilajit' },
+  { out: 'index.html', template: 'index', name: 'index', title: 'Karakoram Naturals — Pure desi ghee & Himalayan shilajit' },
   { out: 'product-ghee.html', template: 'product', name: 'product', product: 'desi-ghee', title: 'Bilona Desi Ghee' },
   { out: 'product-shilajit.html', template: 'product.shilajit', name: 'product', suffix: 'shilajit', product: 'shilajit', title: 'Himalayan Shilajit' },
   { out: 'lab-reports.html', template: 'page.lab-reports', name: 'page', suffix: 'lab-reports', page: 'Lab reports & certificates' },

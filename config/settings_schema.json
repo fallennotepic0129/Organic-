@@ -1,16 +1,16 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Mian Dairies",
+    "theme_name": "Karakoram Naturals",
     "theme_version": "1.0.0",
-    "theme_author": "Mian Dairies",
+    "theme_author": "Karakoram Naturals",
     "theme_documentation_url": "https://github.com/fallennotepic0129/Organic-",
     "theme_support_url": "https://github.com/fallennotepic0129/Organic-"
   },
   {
     "name": "Brand",
     "settings": [
-      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Mian Dairies" },
+      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Karakoram Naturals" },
       { "type": "text", "id": "brand_tagline", "label": "Tagline", "default": "Pure desi ghee & Himalayan shilajit" },
       { "type": "image_picker", "id": "logo", "label": "Logo (optional — a wordmark is used when empty)" },
       { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 240, "step": 4, "unit": "px", "default": 132 },
@@ -34,7 +34,6 @@
     "name": "Motion",
     "settings": [
       { "type": "paragraph", "content": "Visitors who ask their device for reduced motion always get a calm, static version of every animation." },
-      { "type": "checkbox", "id": "enable_preloader", "label": "Show preloader on the homepage", "default": true },
       { "type": "checkbox", "id": "enable_smooth_scroll", "label": "Smooth scrolling", "default": true },
       { "type": "checkbox", "id": "enable_cursor", "label": "Custom cursor (desktop)", "default": true },
       { "type": "checkbox", "id": "enable_grain", "label": "Film grain texture", "default": true }
@@ -44,10 +43,10 @@
     "name": "Contact & WhatsApp",
     "settings": [
       { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number", "info": "International format without + or spaces, e.g. 923001234567", "default": "923000000000" },
-      { "type": "text", "id": "whatsapp_message", "label": "Default WhatsApp message", "default": "Assalam o Alaikum! I'd like to know more about Mian Dairies products." },
+      { "type": "text", "id": "whatsapp_message", "label": "Default WhatsApp message", "default": "Assalam o Alaikum! I'd like to know more about Karakoram Naturals products." },
       { "type": "checkbox", "id": "show_whatsapp_float", "label": "Show floating WhatsApp button", "default": true },
       { "type": "text", "id": "contact_phone", "label": "Phone", "default": "+92 300 0000000" },
-      { "type": "text", "id": "contact_email", "label": "Email", "default": "hello@miandairies.pk" },
+      { "type": "text", "id": "contact_email", "label": "Email", "default": "hello@karakoramnaturals.pk" },
       { "type": "text", "id": "contact_address", "label": "Address", "default": "Lahore, Pakistan" },
       { "type": "text", "id": "contact_hours", "label": "Support hours", "default": "Mon–Sat, 10am – 7pm" }
     ]

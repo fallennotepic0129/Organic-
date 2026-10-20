@@ -2,38 +2,36 @@
   assign product = section.settings.product
   assign uid = 'pk-' | append: section.id
 -%}
-<section class="peaks" data-scene="peaks" data-header-theme="dark" data-pin-length="{{ section.settings.pin_length }}" data-alt-from="{{ section.settings.altitude_from }}" data-alt-to="{{ section.settings.altitude_to }}">
+<section class="peaks" data-scene="peaks" data-pin-length="{{ section.settings.pin_length }}" data-alt-from="{{ section.settings.altitude_from }}" data-alt-to="{{ section.settings.altitude_to }}">
   <div class="peaks__pin" data-peaks-pin>
     <div class="peaks__sky" aria-hidden="true">
-      <svg class="peaks__stars" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice">
-        {%- for i in (1..90) -%}
-          {%- liquid
-            assign sx = i | times: 389 | modulo: 1600
-            assign sy = i | times: 211 | modulo: 560
-            assign sr = i | modulo: 4 | times: 0.35 | plus: 0.6
-            assign sd = i | modulo: 7 | times: 0.6
-          -%}
-          <circle cx="{{ sx }}" cy="{{ sy }}" r="{{ sr }}" style="animation-delay: -{{ sd }}s"/>
-        {%- endfor -%}
+      <div class="peaks__sunglow"></div>
+      <div class="peaks__sun"></div>
+      <div class="peaks__cloud peaks__cloud--1"></div>
+      <div class="peaks__cloud peaks__cloud--2"></div>
+      <div class="peaks__cloud peaks__cloud--3"></div>
+      <svg class="peaks__birds" viewBox="0 0 120 40">
+        <path d="M2 14 q8 -8 14 0 q6 -8 14 0"/>
+        <path d="M44 6 q6 -6 11 0 q5 -6 11 0"/>
+        <path d="M80 22 q5 -5 9 0 q4 -5 9 0"/>
       </svg>
-      <div class="peaks__moon"></div>
     </div>
 
     <svg class="peaks__layer peaks__far" data-peaks-far viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <defs>
         <linearGradient id="{{ uid }}-far" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#4A5468"/>
-          <stop offset=".6" stop-color="#232837"/>
+          <stop offset="0" stop-color="#B9826A"/>
+          <stop offset=".55" stop-color="#7E5444"/>
         </linearGradient>
       </defs>
       <path d="M0 560 L90 470 L150 500 L250 360 L330 430 L410 300 L500 410 L570 350 L650 430 L760 250 L860 390 L940 330 L1030 420 L1130 280 L1230 400 L1300 350 L1400 440 L1490 340 L1600 420 L1600 900 L0 900 Z" fill="url(#{{ uid }}-far)"/>
-      <path d="M250 360 L286 392 L268 385 L255 392 L242 384 L228 392 Z M410 300 L448 346 L429 336 L416 346 L400 334 L382 346 Z M570 350 L597 377 L584 371 L574 377 L559 370 L538 377 Z M760 250 L793 296 L776 286 L765 296 L750 284 L732 296 Z M940 330 L967 357 L954 351 L944 357 L927 350 L904 357 Z M1130 280 L1168 326 L1149 316 L1136 326 L1118 314 L1097 326 Z M1300 350 L1325 372 L1312 368 L1304 372 L1289 367 L1268 372 Z M1490 340 L1540 376 L1515 368 L1497 376 L1479 367 L1458 376 Z" fill="#EEF1F6" opacity=".92"/>
+      <path d="M250 360 L286 392 L268 385 L255 392 L242 384 L228 392 Z M410 300 L448 346 L429 336 L416 346 L400 334 L382 346 Z M570 350 L597 377 L584 371 L574 377 L559 370 L538 377 Z M760 250 L793 296 L776 286 L765 296 L750 284 L732 296 Z M940 330 L967 357 L954 351 L944 357 L927 350 L904 357 Z M1130 280 L1168 326 L1149 316 L1136 326 L1118 314 L1097 326 Z M1300 350 L1325 372 L1312 368 L1304 372 L1289 367 L1268 372 Z M1490 340 L1540 376 L1515 368 L1497 376 L1479 367 L1458 376 Z" fill="#FFE4C8" opacity=".95"/>
     </svg>
     <div class="peaks__fog peaks__fog--1" aria-hidden="true"></div>
 
     <svg class="peaks__layer peaks__mid" data-peaks-mid viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <path d="M0 680 L120 600 L210 640 L330 520 L430 600 L520 560 L610 620 L720 500 L830 600 L950 540 L1060 630 L1180 520 L1290 610 L1400 560 L1500 620 L1600 580 L1600 900 L0 900 Z" fill="#171A24"/>
-      <path d="M330 520 L352 538 L340 536 L330 544 L318 534 Z M720 500 L744 520 L730 517 L720 526 L706 516 Z M1180 520 L1204 540 L1190 536 L1180 545 L1166 535 Z" fill="#C9D0DC" opacity=".55"/>
+      <path d="M0 680 L120 600 L210 640 L330 520 L430 600 L520 560 L610 620 L720 500 L830 600 L950 540 L1060 630 L1180 520 L1290 610 L1400 560 L1500 620 L1600 580 L1600 900 L0 900 Z" fill="#4E3226"/>
+      <path d="M330 520 L352 538 L340 536 L330 544 L318 534 Z M720 500 L744 520 L730 517 L720 526 L706 516 Z M1180 520 L1204 540 L1190 536 L1180 545 L1166 535 Z" fill="#F2C49A" opacity=".6"/>
     </svg>
     <div class="peaks__fog peaks__fog--2" aria-hidden="true"></div>
 
@@ -41,8 +39,8 @@
       <svg class="peaks__layer peaks__rock" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="{{ uid }}-rock" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#3A291D"/>
-            <stop offset=".35" stop-color="#1F160F"/>
+            <stop offset="0" stop-color="#6A4329"/>
+            <stop offset=".35" stop-color="#2A1A10"/>
             <stop offset="1" stop-color="#0B0806"/>
           </linearGradient>
           <radialGradient id="{{ uid }}-crackglow" cx=".5" cy=".5" r=".5">

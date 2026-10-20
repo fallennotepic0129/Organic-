@@ -56,7 +56,7 @@ export const products = {
   }),
 };
 products['ghee-shilajit-bundle'] = {
-  ...makeProduct({ handle: 'ghee-shilajit-bundle', title: 'The Mian Ritual Bundle', type: 'Bundle', variants: [['Default Title', 790000, 820000]], description: '' }),
+  ...makeProduct({ handle: 'ghee-shilajit-bundle', title: 'The Karakoram Ritual Bundle', type: 'Bundle', variants: [['Default Title', 790000, 820000]], description: '' }),
   has_only_default_variant: true,
 };
 
@@ -89,7 +89,7 @@ const sampleReviews = [
   [5, 'We switched from the supermarket brand and the difference in our parathas is unreal.', 'Sana M.', 'Karachi', 'Bilona Desi Ghee'],
   [4, 'Delivered in 3 days with cash on delivery. Will order the 2 kg jar next time.', 'Bilal A.', 'Faisalabad', 'Bilona Desi Ghee'],
   [5, 'Loved that they publish the lab reports. Finally a shilajit I trust.', 'Usman T.', 'Rawalpindi', 'Himalayan Shilajit'],
-  [5, 'Ordered the bundle as a gift for my father. He has asked for a second one already.', 'Mahnoor F.', 'Multan', 'The Mian Ritual Bundle'],
+  [5, 'Ordered the bundle as a gift for my father. He has asked for a second one already.', 'Mahnoor F.', 'Multan', 'The Karakoram Ritual Bundle'],
 ];
 const reviewBlocks = Object.fromEntries(sampleReviews.map(([rating, quote, name, city, product_name], i) => [`r${i}`, { type: 'testimonial', settings: { rating, quote, name, city, product_name, verified: true } }]));
 
@@ -101,7 +101,7 @@ const sampleLab = {
     d: { type: 'row', settings: { test: 'Arsenic (As)', result: 'Not detected', standard: 'Within safe limit', pass: true } },
     e: { type: 'row', settings: { test: 'Solubility in water', result: '100%', standard: 'Fully soluble', pass: true } },
   },
-  settings: { eyebrow: 'Shilajit · sample values', heading: 'Purity & heavy-metal analysis', lab: 'Your lab name', batch: 'MD-SJ-0001', date: '—' },
+  settings: { eyebrow: 'Shilajit · sample values', heading: 'Purity & heavy-metal analysis', lab: 'Your lab name', batch: 'KN-SJ-0001', date: '—' },
 };
 const sampleGheeLab = {
   blocks: {
@@ -111,7 +111,7 @@ const sampleGheeLab = {
     d: { type: 'row', settings: { test: 'Vegetable oil (adulteration)', result: 'Not detected', standard: 'Not detected', pass: true } },
     e: { type: 'row', settings: { test: 'Added colour', result: 'Not detected', standard: 'Not detected', pass: true } },
   },
-  settings: { eyebrow: 'Desi ghee · sample values', heading: 'Ghee purity analysis', lab: 'Your lab name', batch: 'MD-GH-0001', date: '—' },
+  settings: { eyebrow: 'Desi ghee · sample values', heading: 'Ghee purity analysis', lab: 'Your lab name', batch: 'KN-GH-0001', date: '—' },
 };
 
 export const previewOverrides = {
