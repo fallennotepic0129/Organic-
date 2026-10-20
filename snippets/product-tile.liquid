@@ -1,27 +1,16 @@
 {%- comment -%}
-  Large product tile with a code-drawn jar stage. Params: product, uid, tagline, force ('ghee' | 'shilajit' | 'auto')
+  Large product tile with a code-drawn jar stage. Params: product, uid, tagline
 {%- endcomment -%}
-{%- liquid
-  assign visual = force | default: 'auto'
-  if visual == 'auto'
-    assign visual = 'ghee'
-    assign hay = product.handle | append: ' ' | append: product.type | append: ' ' | append: product.title | downcase
-    assign tag_hay = product.tags | join: ' ' | downcase
-    if hay contains 'shilajit' or tag_hay contains 'shilajit'
-      assign visual = 'shilajit'
-    endif
-  endif
--%}
-<article class="tile tile--{{ visual }}" data-tilt data-cursor="View">
+<article class="tile" data-tilt data-cursor="View">
   <a class="tile__link" href="{{ product.url | default: routes.all_products_collection_url }}" aria-label="{{ product.title | escape }}"></a>
   <div class="tile__stage" aria-hidden="true">
     <div class="tile__halo"></div>
     <div class="tile__jar" data-tilt-depth="40">
-      {% render 'product-visual', product: product, uid: uid, force: visual %}
+      {% render 'product-visual', product: product, uid: uid %}
     </div>
   </div>
   <div class="tile__body">
-    <p class="eyebrow">{% if visual == 'shilajit' %}From the peaks{% else %}From the farm{% endif %}</p>
+    <p class="eyebrow">From the farm</p>
     <h3 class="tile__title">{{ product.title | default: 'Product' }}</h3>
     {%- if tagline != blank -%}<p class="tile__tagline">{{ tagline }}</p>{%- endif -%}
     <div class="tile__meta">

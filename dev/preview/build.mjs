@@ -199,7 +199,7 @@ const settingsData = JSON.parse(read('config/settings_data.json'));
 const settingDefs = settingsSchema.flatMap((g) => g.settings || []);
 const themeSettings = {
   ...buildSettings(settingDefs, settingsData.presets[settingsData.current] || {}),
-  upsell_product: products.shilajit,
+  upsell_product: products['ghee-family-pack'],
   social_instagram: 'https://instagram.com/',
   social_facebook: 'https://facebook.com/',
   social_tiktok: 'https://tiktok.com/',
@@ -208,7 +208,7 @@ const themeSettings = {
 const shop = {
   name: 'Karakoram Naturals',
   url: 'https://karakoramnaturals.pk',
-  description: 'Pure bilona desi ghee and Himalayan shilajit.',
+  description: 'Pure bilona desi ghee, hand-churned and slow-cooked over a wood fire.',
   money_format: 'Rs.{{amount}}',
   customer_accounts_enabled: true,
   password_message: '',
@@ -227,9 +227,8 @@ const routes = {
 
 /* ---------- pages ---------- */
 const pages = [
-  { out: 'index.html', template: 'index', name: 'index', title: 'Karakoram Naturals — Pure desi ghee & Himalayan shilajit' },
+  { out: 'index.html', template: 'index', name: 'index', title: 'Karakoram Naturals — Pure bilona desi ghee' },
   { out: 'product-ghee.html', template: 'product', name: 'product', product: 'desi-ghee', title: 'Bilona Desi Ghee' },
-  { out: 'product-shilajit.html', template: 'product.shilajit', name: 'product', suffix: 'shilajit', product: 'shilajit', title: 'Himalayan Shilajit' },
   { out: 'lab-reports.html', template: 'page.lab-reports', name: 'page', suffix: 'lab-reports', page: 'Lab reports & certificates' },
   { out: 'our-story.html', template: 'page.our-story', name: 'page', suffix: 'our-story', page: 'Our story' },
   { out: 'reviews.html', template: 'page.reviews', name: 'page', suffix: 'reviews', page: 'Reviews' },
@@ -243,8 +242,7 @@ const pages = [
 
 const linkMap = [
   [/href="\/products\/desi-ghee(#[^"]*)?"/g, 'href="product-ghee.html$1"'],
-  [/href="\/products\/shilajit(#[^"]*)?"/g, 'href="product-shilajit.html$1"'],
-  [/href="\/products\/ghee-shilajit-bundle"/g, 'href="shop.html"'],
+  [/href="\/products\/ghee-family-pack"/g, 'href="shop.html"'],
   [/href="\/pages\/([\w-]+)"/g, 'href="$1.html"'],
   [/href="\/collections\/all"/g, 'href="shop.html"'],
   [/href="\/cart"/g, 'href="cart.html"'],
@@ -267,7 +265,7 @@ async function build() {
       request: { locale: { iso_code: 'en' }, page_type: p.name, origin: shop.url, design_mode: false },
       template: { name: p.name, suffix: p.suffix || null },
       product,
-      collection: p.name === 'collection' ? { title: 'Shop all', description: '', products: [products['desi-ghee'], products.shilajit] } : null,
+      collection: p.name === 'collection' ? { title: 'Shop all', description: '', products: [products['desi-ghee'], products['ghee-family-pack']] } : null,
       page: p.page ? { title: p.page, content: '', handle: p.suffix } : null,
       page_title: p.title || p.page || product?.title,
       page_description: shop.description,

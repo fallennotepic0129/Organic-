@@ -2,9 +2,7 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {
-        "visual": "auto"
-      },
+      "settings": {},
       "blocks": {
         "title_1": {
           "type": "title",
@@ -231,7 +229,7 @@
     "bundle": {
       "type": "bundle-offer",
       "settings": {
-        "product": "ghee-shilajit-bundle"
+        "product": "ghee-family-pack"
       }
     },
     "faq": {
@@ -262,8 +260,8 @@
         "question_4": {
           "type": "question",
           "settings": {
-            "question": "How should I store ghee and shilajit?",
-            "answer": "<p>Keep both in a cool, dry place with the lid closed and always use a dry spoon.</p>"
+            "question": "How should I store desi ghee?",
+            "answer": "<p>Keep the jar in a cool, dry place with the lid closed and always use a dry spoon. Pure ghee keeps for months at room temperature — no fridge needed.</p>"
           }
         },
         "question_5": {
@@ -272,12 +270,20 @@
             "question": "Can I return or exchange an order?",
             "answer": "<p>If your jar arrives damaged or isn't right, message us within 48 hours of delivery with a photo and we'll replace it. See our refund policy for details.</p>"
           }
+        },
+        "question_ghee_test": {
+          "type": "question",
+          "settings": {
+            "question": "How can I tell if desi ghee is pure?",
+            "answer": "<p>Pure bilona ghee sets with a grainy (danedar) texture, melts quickly on a warm hand, smells nutty and sweet, and leaves no oily film or chemical smell. Every batch of ours is also lab tested — see the Lab Reports page.</p>"
+          }
         }
       },
       "block_order": [
         "question_1",
         "question_2",
         "question_3",
+        "question_ghee_test",
         "question_4",
         "question_5"
       ]

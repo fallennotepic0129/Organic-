@@ -11,7 +11,7 @@
     "name": "Brand",
     "settings": [
       { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Karakoram Naturals" },
-      { "type": "text", "id": "brand_tagline", "label": "Tagline", "default": "Pure desi ghee & Himalayan shilajit" },
+      { "type": "text", "id": "brand_tagline", "label": "Tagline", "default": "Pure bilona desi ghee" },
       { "type": "image_picker", "id": "logo", "label": "Logo (optional — a wordmark is used when empty)" },
       { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 240, "step": 4, "unit": "px", "default": 132 },
       { "type": "image_picker", "id": "favicon", "label": "Favicon" }
@@ -25,8 +25,8 @@
       { "type": "color", "id": "color_ink", "label": "Ink (text)", "default": "#17120D" },
       { "type": "color", "id": "color_gold", "label": "Ghee gold", "default": "#D9A440" },
       { "type": "color", "id": "color_gold_deep", "label": "Deep gold", "default": "#A8741F" },
-      { "type": "color", "id": "color_resin", "label": "Shilajit black", "default": "#0F0B08" },
-      { "type": "color", "id": "color_amber", "label": "Resin amber", "default": "#B9783A" },
+      { "type": "color", "id": "color_dark", "label": "Dark (footer & dark sections)", "default": "#0F0B08" },
+      { "type": "color", "id": "color_amber", "label": "Warm amber", "default": "#B9783A" },
       { "type": "color", "id": "color_leaf", "label": "Leaf green", "default": "#4F5D33" }
     ]
   },

@@ -79,8 +79,7 @@
        ====================================================================== */
     function jarAmbient(root) {
       q('.jar__wave', root).forEach((wave) => {
-        const period = wave.closest('[data-jar="shilajit"]') ? 120 : 60;
-        gsap.to(wave, { x: -period, duration: period / 34, ease: 'none', repeat: -1 });
+        gsap.to(wave, { x: -60, duration: 60 / 34, ease: 'none', repeat: -1 });
       });
       q('.jar__ripple', root).forEach((r, i) => {
         gsap.fromTo(r, { scale: 0.3, opacity: 0.9, transformOrigin: '50% 50%' }, { scale: 2.8, opacity: 0, duration: 1.3, ease: 'power1.out', repeat: -1, delay: (i % 2) * 0.65 });
@@ -341,128 +340,6 @@
     }
 
     /* ======================================================================
-       Scene: From the peaks (shilajit)
-       ====================================================================== */
-    function peaks(el) {
-      const pin = one('[data-peaks-pin]', el);
-      const far = one('[data-peaks-far]', el);
-      const mid = one('[data-peaks-mid]', el);
-      const rock = one('[data-peaks-rock]', el);
-      const sky = one('.peaks__sky', el);
-      const title = one('[data-peaks-title]', el);
-      const captions = q('[data-peaks-caption]', el);
-      const altEl = one('[data-peaks-alt]', el);
-      const ruler = one('[data-peaks-ruler]', el);
-      const crackline = one('.peaks__crackline', el);
-      const halo = one('.peaks__crackhalo', el);
-      const ooze = one('.peaks__ooze', el);
-      const bulb = one('.peaks__bulb', el);
-      const shine = one('.peaks__shine', el);
-      const drop = one('[data-peaks-drop]', el);
-      const jar = one('[data-peaks-jar]', el);
-      const splash = one('[data-peaks-splash]', el);
-      const jarFill = one('.jar__fill', jar);
-      const jarRipples = one('.jar__ripples', jar);
-      const jarGlow = one('.jar__glow', jar);
-      const card = one('[data-peaks-card]', el);
-      const altFrom = parseFloat(el.dataset.altFrom) || 5800;
-      const altTo = parseFloat(el.dataset.altTo) || 4200;
-      const pinLength = parseFloat(el.dataset.pinLength) || 320;
-
-      el.classList.add('is-animated');
-      jarAmbient(jar);
-
-      const mm = gsap.matchMedia();
-      mm.add({ isMobile: '(max-width: 899px)', isDesktop: '(min-width: 900px)' }, (ctx) => {
-        const { isMobile } = ctx.conditions;
-        const ZOOM = isMobile ? 2.2 : 2.6;
-        const alt = { v: altFrom };
-        const fmtAlt = (v) => Math.round(v).toLocaleString('en-US');
-        altEl.textContent = fmtAlt(altFrom);
-
-        gsap.set(rock, { yPercent: 58, scale: 1, autoAlpha: 1, transformOrigin: '50% 50%' });
-        gsap.set(mid, { yPercent: 18 });
-        gsap.set([far, mid], { transformOrigin: '50% 70%' });
-        gsap.set(captions, { autoAlpha: 0, y: 20 });
-        gsap.set(jar, { yPercent: 140, xPercent: 0, scale: 1 });
-        gsap.set(card, { autoAlpha: 0, x: isMobile ? 0 : 70, y: isMobile ? 80 : 0 });
-        gsap.set(drop, { autoAlpha: 0 });
-        gsap.set([crackline, halo, shine], { opacity: 0 });
-        gsap.set(ooze, { attr: { ry: 3, cy: 464 } });
-        gsap.set(bulb, { attr: { r: 0, cy: 470 } });
-        gsap.set(jarFill, { y: 120 });
-
-        // Positions in pin space; recomputed on refresh.
-        const sliceScale = () => Math.max(pin.offsetWidth / 1600, pin.offsetHeight / 900);
-        const DROP_H = 39; // matches .peaks__drop height (SVG elements have no offsetHeight)
-        const dropStart = () => pin.offsetHeight / 2 + (494 - 450) * sliceScale() * ZOOM - DROP_H * 0.55;
-        const dropEnd = () => jar.offsetTop + jar.offsetHeight * 0.42 - DROP_H;
-
-        const tl = gsap.timeline({
-          defaults: { ease: 'none' },
-          scrollTrigger: {
-            trigger: pin,
-            start: 'top top',
-            end: () => `+=${window.innerHeight * (pinLength / 100)}`,
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        // 1 — descent through the range
-        tl.to(title, { yPercent: -70, autoAlpha: 0, duration: 1.4 }, 0.4)
-          .to(sky, { yPercent: -25, duration: 3 }, 0)
-          .to(far, { yPercent: -14, duration: 3 }, 0)
-          .to(mid, { yPercent: -6, duration: 3 }, 0)
-          .to(rock, { yPercent: 0, duration: 3, ease: 'power1.out' }, 0)
-          .to(alt, { v: altTo, duration: 3, onUpdate: () => { altEl.textContent = fmtAlt(alt.v); } }, 0)
-          .fromTo(ruler, { backgroundPosition: '0px 0px' }, { backgroundPosition: '0px 420px', duration: 3 }, 0);
-
-        // 2 — close in on the crack
-        tl.to(rock, { scale: ZOOM, duration: 1.6, ease: 'power2.inOut' }, 3)
-          .to([far, mid], { scale: 1.35, autoAlpha: 0.2, duration: 1.6 }, 3)
-          .to(halo, { opacity: 1, duration: 1 }, 3.6)
-          .to(crackline, { opacity: 1, duration: 0.6 }, 3.8);
-
-        // 3 — resin seeps and gathers
-        tl.to(ooze, { attr: { ry: 15, cy: 475 }, duration: 0.7 }, 4.4)
-          .to(bulb, { attr: { r: 9, cy: 493 }, duration: 0.8 }, 4.7)
-          .to(shine, { opacity: 0.9, duration: 0.3 }, 5.0)
-          .to(jar, { yPercent: 0, duration: 1.2, ease: 'power2.out' }, 4.3);
-
-        // 4 — the drop falls into the jar
-        tl.set(bulb, { attr: { r: 0 } }, 5.55)
-          .set(shine, { opacity: 0 }, 5.55)
-          .fromTo(drop, { autoAlpha: 1, y: dropStart, scaleX: 1, scaleY: 1 }, { y: dropEnd, scaleX: 0.85, scaleY: 1.3, duration: 0.8, ease: 'power2.in', immediateRender: false }, 5.55)
-          .to(ooze, { attr: { ry: 4, cy: 466 }, duration: 0.4 }, 5.55)
-          .set(drop, { autoAlpha: 0 }, 6.35)
-          .fromTo(splash, { scale: 0.4, opacity: 0.9 }, { scale: 1.7, opacity: 0, duration: 0.5, immediateRender: false }, 6.35)
-          .to(jarRipples, { opacity: 1, duration: 0.1 }, 6.35)
-          .to(jarRipples, { opacity: 0, duration: 0.4 }, 6.9)
-          .to(jarFill, { y: 30, duration: 0.8, ease: 'power2.out' }, 6.35)
-          .to(jarGlow, { opacity: 0.4, duration: 0.4 }, 6.35)
-          .to(jarGlow, { opacity: 0.14, duration: 0.8 }, 6.8);
-
-        // captions ride along
-        const capAt = isMobile ? [1.8, 3.4, 5.0] : [0.8, 3.4, 5.4];
-        captions.forEach((c, i) => {
-          tl.to(c, { autoAlpha: 1, y: 0, duration: 0.4 }, capAt[i] ?? 5.4);
-          if (isMobile && i < captions.length - 1) tl.to(c, { autoAlpha: 0, y: -14, duration: 0.3 }, (capAt[i + 1] ?? 6) - 0.4);
-        });
-
-        // 5 — reveal the product
-        tl.to(jar, { xPercent: isMobile ? 0 : -18, yPercent: isMobile ? -150 : -10, scale: isMobile ? 0.72 : 1.1, duration: 1, ease: 'power2.inOut' }, 6.9)
-          .to(rock, { autoAlpha: 0.5, duration: 1 }, 6.9)
-          .to(halo, { opacity: 0.45, duration: 1 }, 6.9)
-          .to(card, { autoAlpha: 1, x: 0, y: 0, duration: 0.8, ease: 'power3.out' }, 7.3);
-        if (isMobile) tl.to(captions, { autoAlpha: 0, duration: 0.3 }, 6.9);
-        tl.to({}, { duration: 0.6 });
-      });
-    }
-
-    /* ======================================================================
        Scene: Bilona process (horizontal)
        ====================================================================== */
     function bilona(el) {
@@ -555,10 +432,9 @@
       const stage = one('[data-pdp-stage]', el);
       const visual = one('[data-pdp-visual]', el);
       const fill = one('.jar__fill', visual);
-      const isShilajit = !!one('[data-jar="shilajit"]', visual);
       jarAmbient(visual);
       gsap.from(visual, { y: 90, scale: 0.9, autoAlpha: 0, duration: 1.6, ease: 'expo.out', delay: 0.1 });
-      if (fill) gsap.from(fill, { y: isShilajit ? 210 : 290, duration: 2.4, ease: 'power3.inOut', delay: 0.35 });
+      if (fill) gsap.from(fill, { y: 290, duration: 2.4, ease: 'power3.inOut', delay: 0.35 });
       gsap.from(q('[data-pdp-info] > *', el), { y: 30, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.05, delay: 0.15 });
 
       if (finePointer && stage) {
@@ -588,7 +464,7 @@
       jarAmbient(el);
     }
 
-    const scenes = { 'golden-pour': goldenPour, peaks, bilona, purity, bundle, pdp, 'page-hero': pageHero };
+    const scenes = { 'golden-pour': goldenPour, bilona, purity, bundle, pdp, 'page-hero': pageHero };
 
     /* ======================================================================
        Cursor

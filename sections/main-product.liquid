@@ -1,26 +1,13 @@
 {%- liquid
   assign current = product.selected_or_first_available_variant
   assign form_id = 'ProductForm-' | append: section.id
-  assign visual = section.settings.visual
-  if visual == 'auto'
-    assign visual = 'ghee'
-    assign hay = product.handle | append: ' ' | append: product.type | append: ' ' | append: product.title | downcase
-    assign tag_hay = product.tags | join: ' ' | downcase
-    if hay contains 'shilajit' or tag_hay contains 'shilajit'
-      assign visual = 'shilajit'
-    endif
-  endif
-  assign tone = 'light'
-  if visual == 'shilajit'
-    assign tone = 'dark'
-  endif
   assign uid = 'pdp-' | append: section.id
   assign uid_thumb = uid | append: 't'
   assign uid_sticky = uid | append: 's'
   assign rating = product.metafields.reviews.rating.value
   assign rating_count = product.metafields.reviews.rating_count
 -%}
-<section class="pdp pdp--{{ tone }} pdp--{{ visual }}" data-scene="pdp" data-product-section {% if tone == 'dark' %}data-header-theme="dark"{% endif %}>
+<section class="pdp" data-scene="pdp" data-product-section>
   <div class="pdp__grid container">
     <div class="pdp__media">
       <div class="pdp__stage" data-pdp-stage>
@@ -35,7 +22,7 @@
           {%- endfor -%}
         </div>
         <div class="pdp__visual" data-pdp-visual>
-          {% render 'product-visual', product: product, uid: uid, force: visual %}
+          {% render 'product-visual', product: product, uid: uid %}
         </div>
         <div class="pdp__photo" data-pdp-photo hidden></div>
       </div>
@@ -43,7 +30,7 @@
       {%- if product.media.size > 0 -%}
         <div class="pdp__thumbs" role="list">
           <button type="button" class="pdp__thumb is-active" data-pdp-thumb="visual" aria-label="Illustration" role="listitem">
-            {% render 'product-visual', product: product, uid: uid_thumb, force: visual, label: false %}
+            {% render 'product-visual', product: product, uid: uid_thumb, label: false %}
           </button>
           {%- for media in product.media -%}
             {%- if media.media_type == 'image' -%}
@@ -134,7 +121,7 @@
                     <input id="Qty-{{ section.id }}" type="number" name="quantity" value="1" min="1" inputmode="numeric">
                     <button type="button" data-qty-step="1" aria-label="Increase quantity">{% render 'icon', name: 'plus', size: 16 %}</button>
                   </div>
-                  <button type="submit" class="btn btn--{% if tone == 'dark' %}gold{% else %}ink{% endif %} btn--grow" data-add-button data-magnetic {% unless current.available %}disabled{% endunless %}>
+                  <button type="submit" class="btn btn--ink btn--grow" data-add-button data-magnetic {% unless current.available %}disabled{% endunless %}>
                     <span class="btn__label" data-add-label>{% if current.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</span>
                     <span class="btn__price" data-add-price>· {{ current.price | money_without_trailing_zeros }}</span>
                   </button>
@@ -194,12 +181,12 @@
 
   <div class="sticky-buy" data-sticky-buy aria-hidden="true">
     <div class="sticky-buy__inner">
-      <div class="sticky-buy__jar" aria-hidden="true">{% render 'product-visual', product: product, uid: uid_sticky, force: visual, label: false %}</div>
+      <div class="sticky-buy__jar" aria-hidden="true">{% render 'product-visual', product: product, uid: uid_sticky, label: false %}</div>
       <div class="sticky-buy__info">
         <p class="sticky-buy__title">{{ product.title }}</p>
         <p class="sticky-buy__price"><span data-sticky-variant>{% unless product.has_only_default_variant %}{{ current.title }} · {% endunless %}</span><span data-sticky-price>{{ current.price | money_without_trailing_zeros }}</span></p>
       </div>
-      <button type="submit" form="{{ form_id }}" class="btn btn--{% if tone == 'dark' %}gold{% else %}ink{% endif %}" data-add-button tabindex="-1" {% unless current.available %}disabled{% endunless %}>
+      <button type="submit" form="{{ form_id }}" class="btn btn--ink" data-add-button tabindex="-1" {% unless current.available %}disabled{% endunless %}>
         <span class="btn__label" data-add-label>{% if current.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</span>
       </button>
     </div>
@@ -237,11 +224,6 @@
   "tag": "div",
   "class": "section-main-product",
   "settings": [
-    { "type": "select", "id": "visual", "label": "Jar illustration", "default": "auto", "options": [
-      { "value": "auto", "label": "Automatic (shilajit if the product mentions it)" },
-      { "value": "ghee", "label": "Desi ghee (light page)" },
-      { "value": "shilajit", "label": "Shilajit (dark page)" }
-    ] },
     { "type": "text", "id": "orbit_text", "label": "Rotating badge text", "default": "LAB TESTED · 100% PURE · SMALL BATCH ·" }
   ],
   "blocks": [

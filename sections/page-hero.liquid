@@ -11,11 +11,8 @@
     </div>
     {%- if section.settings.art != 'none' -%}
       <div class="page-hero__art" aria-hidden="true" data-parallax="-0.12">
-        {%- if section.settings.art == 'ghee' or section.settings.art == 'both' -%}
-          <div class="page-hero__jar page-hero__jar--ghee" data-float>{% render 'jar-ghee', uid: uid_g %}</div>
-        {%- endif -%}
-        {%- if section.settings.art == 'shilajit' or section.settings.art == 'both' -%}
-          <div class="page-hero__jar page-hero__jar--shilajit" data-float>{% render 'jar-shilajit', uid: uid_s %}</div>
+        {%- if section.settings.art == 'ghee' -%}
+          <div class="page-hero__jar" data-float>{% render 'jar-ghee', uid: uid_g %}</div>
         {%- endif -%}
         {%- if section.settings.art == 'seal' -%}
           <div class="page-hero__seal" data-float>{% render 'wax-seal', uid: uid_s, mark: 'KN', text: 'LAB TESTED · CERTIFIED · PURE · ' %}</div>
@@ -34,9 +31,8 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "heading", "label": "Heading", "info": "Defaults to the page title" },
     { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "select", "id": "art", "label": "Illustration", "default": "both", "options": [
-      { "value": "none", "label": "None" }, { "value": "ghee", "label": "Ghee jar" }, { "value": "shilajit", "label": "Shilajit jar" },
-      { "value": "both", "label": "Both jars" }, { "value": "seal", "label": "Wax seal" }
+    { "type": "select", "id": "art", "label": "Illustration", "default": "ghee", "options": [
+      { "value": "none", "label": "None" }, { "value": "ghee", "label": "Ghee jar" }, { "value": "seal", "label": "Wax seal" }
     ] },
     { "type": "select", "id": "tone", "label": "Background", "default": "cream", "options": [ { "value": "cream", "label": "Cream" }, { "value": "dark", "label": "Dark" } ] }
   ],

@@ -1,9 +1,8 @@
 {%- comment -%}
-  Floating "buy" card used at the end of the hero and shilajit scenes.
-  Params: product, tone ('light' | 'dark'), eyebrow, blurb, uid
+  Floating "buy" card used at the end of the hero scene.
+  Params: product, eyebrow, blurb
 {%- endcomment -%}
-{%- assign tone = tone | default: 'light' -%}
-<div class="pcard pcard--{{ tone }}" data-pcard>
+<div class="pcard" data-pcard>
   {%- if eyebrow != blank -%}<p class="eyebrow pcard__eyebrow">{{ eyebrow }}</p>{%- endif -%}
   {%- if product != blank -%}
     <h3 class="pcard__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
@@ -31,7 +30,7 @@
       <input type="hidden" name="quantity" value="1">
       <div class="pcard__foot">
         <span class="pcard__price" data-chip-target>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</span>
-        <button type="submit" class="btn btn--{% if tone == 'dark' %}gold{% else %}ink{% endif %}" data-magnetic {% unless product.available %}disabled{% endunless %}>
+        <button type="submit" class="btn btn--ink" data-magnetic {% unless product.available %}disabled{% endunless %}>
           <span class="btn__label">{% if product.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</span>
           {% render 'icon', name: 'plus', size: 16 %}
         </button>

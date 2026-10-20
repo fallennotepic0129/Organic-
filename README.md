@@ -1,13 +1,12 @@
 # Karakoram Naturals — Shopify theme
 
-A custom Shopify Online Store 2.0 theme for **Karakoram Naturals**, built for two hero products: **bilona desi ghee** and **Himalayan shilajit**. The animation work follows the techniques used by Awwwards-winning sites: GSAP ScrollTrigger scenes, SplitText reveals, Lenis smooth scrolling, magnetic buttons and a custom cursor.
+A custom Shopify Online Store 2.0 theme for **Karakoram Naturals**, built around one hero product: **bilona desi ghee**. The animation work follows the techniques used by Awwwards-winning sites: GSAP ScrollTrigger scenes, SplitText reveals, Lenis smooth scrolling, magnetic buttons and a custom cursor.
 
 ## The signature scenes
 
 | Scene | Where | What happens |
 | --- | --- | --- |
 | **Golden Pour** | Homepage hero | Scrolling lifts the jar lid. A brass ladle tips in and pours a golden stream. The jar fills up with grainy (danedar) ghee while a "Poured %" meter counts. Callouts draw in, the lid comes back, the label wraps on, and a buy card slides in. |
-| **From the Peaks** | Homepage, shilajit | You descend through Himalayan ranges at night as an altitude counter ticks from 5,800 m down to 4,200 m. The camera zooms into a glowing crack, resin seeps and forms a drop, and the drop falls into the jar. Then the buy card appears. |
 | **Bilona process** | Homepage, ghee product page, Our Story | A pinned horizontal timeline with six illustrated steps (cow, overnight curd, hand-churning, makhan, wood fire, jar), each with its own small looping animation, plus a progress rail. |
 | **Purity reveal** | Homepage, Lab Reports | Lab stats count up. Certificate cards drop in and get stamped with wax seals. Tapping a card opens the certificate (image or PDF) in a lightbox. |
 
@@ -18,8 +17,7 @@ Visitors whose device asks for reduced motion get a calm, static version of ever
 ## Store features
 
 - **Product page:** size pills with per-size prices, quantity, AJAX add-to-cart, *Buy it now*, **Order on WhatsApp** (pre-filled message with the product, size and quantity), a delivery date estimate, trust badges, a lab report link, collapsible tabs and a sticky add-to-cart bar.
-- **Shilajit product page:** a dark theme, a "4 ways to test pure shilajit" section and a lab results table.
-- **Cart drawer:** a free-delivery progress bar, quantity steppers, an upsell for the other product, a cash-on-delivery note, and checkout.
+- **Cart drawer:** a free-delivery progress bar, quantity steppers, a family-pack upsell, a cash-on-delivery note, and checkout.
 - **Reviews:** works with **Judge.me** (free plan). Star ratings read Shopify's standard review metafields. The review sections accept Judge.me app blocks, and the **Reviews** page has a "write a review" flow for each product.
 - **Pages:** Lab Reports & Certificates, Our Story, FAQ, Contact (form + WhatsApp), Track Order (courier lookup + WhatsApp fallback) and Reviews.
 - **Other:** floating WhatsApp button, rotating announcement bar, newsletter signup, product structured data for SEO, and classic customer account pages.
@@ -36,10 +34,9 @@ Use these handles so the homepage connects to them automatically. You can also p
 | Product | Handle | Variants | Template |
 | --- | --- | --- | --- |
 | Bilona Desi Ghee | `desi-ghee` | Size: 500 g / 1 kg / 2 kg | `product` (default) |
-| Himalayan Shilajit | `shilajit` | Size: 10 g / 20 g / 30 g | **`product.shilajit`** |
-| The Karakoram Ritual Bundle | `ghee-shilajit-bundle` | none | `product` |
+| Family Pack — 2 × 1 kg | `ghee-family-pack` | none | `product` |
 
-To get the dark page, assign the **shilajit** template on the product's admin page under **Theme template**. A product whose handle, type, title or tags mention "shilajit" automatically gets the dark jar illustration.
+The **Family pack offer** section on the homepage and product page, and the cart upsell (Theme settings → Cart & delivery), use the family pack product.
 
 ### 3. Create the pages
 In **Online Store → Pages**, create each page and choose its template:
@@ -78,7 +75,7 @@ These were written as **realistic placeholders**. Please verify or replace each 
 - **Certificates:** upload real PFA / lab / Halal certificates (image or PDF) in the *Purity & certificates* blocks. Remove any you don't hold.
 - **Lab results tables:** results ship as "—". Enter the values from your actual lab report, and tick **Passed** only for real passes.
 - **Stats:** 100% pure, 0 additives, ~30 L milk per jar, 4,200 m altitude. Edit them to match your own facts.
-- **Claims and copy:** "grass-fed", the bilona steps and timings, shilajit sourcing and the usage instructions. Adjust these to your real process. Keep health wording modest.
+- **Claims and copy:** "grass-fed", the bilona steps and timings, and the usage instructions. Adjust these to your real process. Keep health wording modest.
 - **Courier tracking URLs** on the Track Order page. Test each with a real tracking number and fix or remove any that don't work.
 - **Story text** on the Our Story page.
 - **Contact details** and the WhatsApp number (theme settings).
@@ -102,9 +99,9 @@ The preview renderer (`dev/preview/`) runs the real Liquid templates through Liq
 assets/      theme.css · theme.js (cart, variants, UI) · motion.js (all animation)
              gsap / ScrollTrigger / SplitText / lenis (bundled, no CDN)
 layout/      theme.liquid · password.liquid
-sections/    hero-golden-pour · shilajit-peaks · bilona-process · purity-reveal · …
-snippets/    jar-ghee · jar-shilajit · bilona-art · wax-seal · product-card · …
-templates/   JSON templates for every page type, incl. product.shilajit and page.*
+sections/    hero-golden-pour · bilona-process · purity-reveal · bundle-offer · …
+snippets/    jar-ghee · bilona-art · wax-seal · product-card · …
+templates/   JSON templates for every page type, incl. page.*
 dev/         preview renderer + theme check (not uploaded to Shopify)
 ```
 

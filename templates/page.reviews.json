@@ -6,15 +6,14 @@
         "eyebrow": "Reviews",
         "heading": "Tried it? Tell everyone.",
         "text": "Honest reviews help other families choose. Photo reviews are extra welcome.",
-        "art": "both"
+        "art": "ghee"
       }
     },
     "leave": {
       "type": "leave-review",
       "settings": {
         "products": [
-          "desi-ghee",
-          "shilajit"
+          "desi-ghee"
         ]
       },
       "blocks": {
@@ -22,7 +21,7 @@
           "type": "step",
           "settings": {
             "title": "Pick your product.",
-            "text": "Choose the jar you bought below."
+            "text": "Find your jar of desi ghee below."
           }
         },
         "step_2": {

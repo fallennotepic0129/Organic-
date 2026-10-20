@@ -46,17 +46,9 @@ export const products = {
     variants: [['500 g', 195000], ['1 kg', 370000], ['2 kg', 720000, 740000]],
     description: '<p>Made from the curd of grass-fed cows, hand-churned with a wooden madhani and slow-cooked over a wood fire until golden and danedar. Nothing added — ever.</p>',
   }),
-  shilajit: makeProduct({
-    handle: 'shilajit',
-    title: 'Himalayan Shilajit',
-    type: 'Shilajit',
-    tags: ['shilajit'],
-    variants: [['10 g', 250000], ['20 g', 450000], ['30 g', 620000, 650000]],
-    description: '<p>Pure shilajit resin gathered by hand from high cliffs in Gilgit-Baltistan, dissolved in spring water, filtered and slowly sun-dried.</p>',
-  }),
 };
-products['ghee-shilajit-bundle'] = {
-  ...makeProduct({ handle: 'ghee-shilajit-bundle', title: 'The Karakoram Ritual Bundle', type: 'Bundle', variants: [['Default Title', 790000, 820000]], description: '' }),
+products['ghee-family-pack'] = {
+  ...makeProduct({ handle: 'ghee-family-pack', title: 'Family Pack — 2 × 1 kg', type: 'Ghee', variants: [['Default Title', 699000, 740000]], description: '' }),
   has_only_default_variant: true,
 };
 
@@ -85,24 +77,14 @@ export const cartEmpty = { item_count: 0, total_price: 0, note: '', currency: { 
 // Preview-only content, clearly marked as samples.
 const sampleReviews = [
   [5, 'The smell when I opened the jar took me straight back to my nani\'s kitchen. Proper danedar ghee.', 'Ayesha K.', 'Lahore', 'Bilona Desi Ghee'],
-  [5, 'Dissolves completely in warm water, no grit at all. Packaging was beautiful too.', 'Hamza R.', 'Islamabad', 'Himalayan Shilajit'],
+  [5, 'Melts beautifully on hot rotis and the aroma fills the kitchen. Packaging was lovely too.', 'Hamza R.', 'Islamabad', 'Bilona Desi Ghee'],
   [5, 'We switched from the supermarket brand and the difference in our parathas is unreal.', 'Sana M.', 'Karachi', 'Bilona Desi Ghee'],
   [4, 'Delivered in 3 days with cash on delivery. Will order the 2 kg jar next time.', 'Bilal A.', 'Faisalabad', 'Bilona Desi Ghee'],
-  [5, 'Loved that they publish the lab reports. Finally a shilajit I trust.', 'Usman T.', 'Rawalpindi', 'Himalayan Shilajit'],
-  [5, 'Ordered the bundle as a gift for my father. He has asked for a second one already.', 'Mahnoor F.', 'Multan', 'The Karakoram Ritual Bundle'],
+  [5, 'Loved that they publish the lab reports. Finally a ghee I trust for my kids.', 'Usman T.', 'Rawalpindi', 'Bilona Desi Ghee'],
+  [5, 'Ordered the family pack for my parents. They have already asked for another one.', 'Mahnoor F.', 'Multan', 'Family Pack — 2 × 1 kg'],
 ];
 const reviewBlocks = Object.fromEntries(sampleReviews.map(([rating, quote, name, city, product_name], i) => [`r${i}`, { type: 'testimonial', settings: { rating, quote, name, city, product_name, verified: true } }]));
 
-const sampleLab = {
-  blocks: {
-    a: { type: 'row', settings: { test: 'Fulvic acid', result: '62%', standard: 'Per lab report', pass: true } },
-    b: { type: 'row', settings: { test: 'Lead (Pb)', result: '< 0.5 ppm', standard: 'Within safe limit', pass: true } },
-    c: { type: 'row', settings: { test: 'Mercury (Hg)', result: 'Not detected', standard: 'Within safe limit', pass: true } },
-    d: { type: 'row', settings: { test: 'Arsenic (As)', result: 'Not detected', standard: 'Within safe limit', pass: true } },
-    e: { type: 'row', settings: { test: 'Solubility in water', result: '100%', standard: 'Fully soluble', pass: true } },
-  },
-  settings: { eyebrow: 'Shilajit · sample values', heading: 'Purity & heavy-metal analysis', lab: 'Your lab name', batch: 'KN-SJ-0001', date: '—' },
-};
 const sampleGheeLab = {
   blocks: {
     a: { type: 'row', settings: { test: 'Moisture', result: '0.1%', standard: 'Per PFA standard', pass: true } },
@@ -117,6 +99,5 @@ const sampleGheeLab = {
 export const previewOverrides = {
   index: { reviews: { type: 'reviews', settings: { eyebrow: 'Sample reviews — replace with real ones' }, blocks: reviewBlocks } },
   'page.reviews': { reviews: { type: 'reviews', settings: { eyebrow: 'Sample reviews — replace with real ones', heading: 'What others are saying.' }, blocks: reviewBlocks } },
-  'product.shilajit': { lab: { type: 'lab-results', ...sampleLab } },
-  'page.lab-reports': { ghee: { type: 'lab-results', ...sampleGheeLab }, shilajit: { type: 'lab-results', ...sampleLab } },
+  'page.lab-reports': { ghee: { type: 'lab-results', ...sampleGheeLab } },
 };

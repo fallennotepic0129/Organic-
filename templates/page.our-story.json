@@ -6,7 +6,7 @@
         "eyebrow": "Our story",
         "heading": "Made slowly, on purpose.",
         "text": "Karakoram Naturals began with one family recipe and one stubborn idea: if we wouldn't feed it to our own children, we won't sell it.",
-        "art": "both"
+        "art": "ghee"
       }
     },
     "story": {
@@ -125,26 +125,12 @@
         "feature_2",
         "feature_3"
       ]
-    },
-    "peaks_story": {
-      "type": "story",
-      "settings": {
-        "art": "shilajit",
-        "eyebrow": "The mountains",
-        "heading": "And then we went north.",
-        "text": "<p>Our shilajit comes from trusted harvesters in Gilgit-Baltistan who gather it by hand from high cliffs, then purify it slowly with spring water and sunlight.</p>",
-        "reverse": true,
-        "tone": "dark",
-        "button_label": "Shop shilajit",
-        "button_link": "/products/shilajit"
-      }
     }
   },
   "order": [
     "hero",
     "story",
     "bilona",
-    "values",
-    "peaks_story"
+    "values"
   ]
 }
